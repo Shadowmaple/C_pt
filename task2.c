@@ -10,6 +10,7 @@ int main()
 	scanf("%f", &grade1);
 	printf("成绩2：");
 	scanf("%f", &grade2);
+	
 	m1 = grade1/10;
 	m2 = grade2/10;
 

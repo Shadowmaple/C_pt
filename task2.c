@@ -35,13 +35,13 @@ int main()
 					case 2:
 					case 3:
 					case 4:
-					case 5:puts("it is not pass."); break;
+					case 5: puts("it is not pass."); break;
 					case 6:
 					case 7:
 					case 8:
 					case 9:
-					case 10:puts("it is pass."); break;
-					default:puts("it is error.");
+					case 10: puts("it is pass."); break;
+					default: puts("it is error.");
 				}
 			break;
 		default : puts("it is error.");

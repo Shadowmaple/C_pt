@@ -4,6 +4,7 @@ int main()
 {
 	int n;
 	puts("让我们来画一个金字塔。");
+	
 	do {
 		printf("金字塔有几层：");
 		scanf("%d", &n);
@@ -17,6 +18,7 @@ int main()
 			putchar(' ');
 		for (j=1; j<=(i-1)*2+1; j++)
 			putchar('*');
+
 		putchar('\n');
 	}
         return 0;

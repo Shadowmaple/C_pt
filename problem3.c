@@ -9,11 +9,10 @@ int main()
 	} while (b <=2);
 
 	int a[b][b];
-
 	for (int i=0; i<b; i++)
 	{
-		for (int j=0; j<b; j++) 
-			scanf("%d ", &a[i][j]);
+		for (int j=0; j<b; j++)
+			scanf("%d", &a[i][j]);
 	}
 
 	for (c=1; c<=(b+1)/2; c++) {

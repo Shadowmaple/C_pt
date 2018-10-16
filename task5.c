@@ -4,9 +4,8 @@
 
 int main()
 {
-	int a[INT_MAX], n = 1;
+	int a[SHRT_MAX], n = 1;
 	int check;
-
 	a[0] = 1;
 
 	for (int i = 2; i < 101; i++) {

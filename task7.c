@@ -1,7 +1,6 @@
 #include <stdio.h>
-#include <limits.h>
 
-void multiply(int a[][SHRT_MAX], int b[], int line)
+void multiply(int a[][100], int b[], int line)
 {
 	int pr[line-1];
 	for (int i=0; i < line; i++) {
@@ -16,7 +15,7 @@ void multiply(int a[][SHRT_MAX], int b[], int line)
 
 int main()
 {
-	int a[SHRT_MAX][SHRT_MAX], b[SHRT_MAX], n;
+	int a[100][100], b[100], n;
 	int line = 0;
 	int check;
 	/*line代表行数，b[]代表元素个数*/

@@ -32,6 +32,11 @@ int xy(int run, int b, int c)
 
 void num(int a[], int b[], int c[], int re[], int s)
 {
+	
+
+}
+int rs(int a[])
+{
 
 	for (int i=0; i < s; i++) {
 		int run = 'T';
@@ -58,22 +63,49 @@ void num(int a[], int b[], int c[], int re[], int s)
 
 }
 
+void (int y, int m, int d)
+{
+	if (m >12 || m<1 || d <1 || y < 0)
+		puts("error!");
+	else
+		switch (m) {
+		case 1:
+		case 3:
+		case 5:
+		case 7:
+		case 8:
+		case 10:
+		case 12: if (d > 31) puts("error!");
+				break;
+		case 4:
+		case 6:
+		case 9:
+		case 11: if (d > 30) puts("error!");
+				break;
+		default :if (rm() == 'T')
+					 if (d > 29) puts("error!");
+				else 
+					if (d > 28) puts("error!");
+	}
+
+}
+
 int main()
 {	
 	//line为行数即有几组，re[]为最后的第几天
 	int year[100], month[100], day[100];
-	int re[100], line =0;
+	int re[100], line =-1;
 	
 	//输入，输入0则停止
 	do {
-		scanf("%d/%d/%d", &year[line], &month[line], &day[line]);
-		if (month[line] > 12 || month[line] < 1 || day[line] > 31 ||
-			day[line] < 1 || year[line] < 0)
-			puts("error!");
-
 		line++;
+		scanf("%d/%d/%d", &year[line], &month[line], &day[line]);
+		if (!year[line]) break;
+		else if (month[line] > 12 || month[line] < 1 || day[line] > 31 ||
+					day[line] < 1 || year[line] < 1)
+					puts("error!");
 
-	} while (year[line] != 0);
+	} while (1);
 
 	num(year, month, day, re, line);
 	

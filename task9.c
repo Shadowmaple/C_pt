@@ -58,7 +58,7 @@ int rs(int run)
 int check(int y, int m, int d)
 {
 	int ck = 0;
-	if (m >12 || m<1 || d <1 /*|| d > 31*/ || y < 0) {
+	if (m >12 || m<1 || d <1 || d > 31 || y < 0) {
 		ck = 1;
 		puts("error!");
 	} else

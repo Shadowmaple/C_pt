@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+int rs();
+
 //返回2月份的天数
 int rn(int run)
 {
@@ -32,38 +34,28 @@ int xy(int run, int b, int c)
 
 void num(int a[], int b[], int c[], int re[], int s)
 {
-	
-
-}
-int rs(int a[])
-{
-
 	for (int i=0; i < s; i++) {
-		int run = 'T';
-		//run为T则为闰年
-		
-		//判断是否为闰年
-		if (a[i] % 100) {
-			if (a[i] % 4) {
-				run = 'F';
-				re[i] = xy(run, b[i], c[i]);
-			}
-			else re[i] = xy(run, b[i], c[i]);
-
-		} else {
-			if (!(a[i] % 400)) {
-				run = 'F';
-				re[i] = xy(run, b[i], c[i]);
-			}
-			else re[i] = xy(run, b[i], c[i]);
-		}
-
+		re[i] = xy(rs(a[i]), b[i], c[i]);
 	}
-
-
 }
 
-void (int y, int m, int d)
+int rs(int run)
+{
+	//判断是否为闰年
+	if (run % 100)
+		if (run % 4)
+			return 'F';
+		
+		else return 'T';
+
+	else
+		if (run % 400)
+			return 'T';
+		else return 'F';
+	
+}
+
+int check(int y, int m, int d)
 {
 	if (m >12 || m<1 || d <1 || y < 0)
 		puts("error!");
@@ -75,19 +67,30 @@ void (int y, int m, int d)
 		case 7:
 		case 8:
 		case 10:
-		case 12: if (d > 31) puts("error!");
+		case 12: if (d > 31) {
+					 puts("error!");
+					 return 1;
+				 }
 				break;
 		case 4:
 		case 6:
 		case 9:
-		case 11: if (d > 30) puts("error!");
+		case 11: if (d > 30) {
+					 puts("error!");
+					 return 1;
+				 }
 				break;
-		default :if (rm() == 'T')
-					 if (d > 29) puts("error!");
+		default :if (rs(y) == 'T')
+					 if (d > 29) {
+						puts("error!");
+						return 1;
+					 }
 				else 
-					if (d > 28) puts("error!");
+					if (d > 28) {
+						puts("error!");
+						return 1;
+					}
 	}
-
 }
 
 int main()
@@ -100,10 +103,11 @@ int main()
 	do {
 		line++;
 		scanf("%d/%d/%d", &year[line], &month[line], &day[line]);
+
 		if (!year[line]) break;
-		else if (month[line] > 12 || month[line] < 1 || day[line] > 31 ||
-					day[line] < 1 || year[line] < 1)
-					puts("error!");
+		else 
+			if (check(year[line], month[line], day[line]))
+				line--;
 
 	} while (1);
 

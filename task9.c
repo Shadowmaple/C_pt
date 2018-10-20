@@ -103,7 +103,7 @@ int main()
 	int year[100], month[100], day[100];
 	int re[100], line =-1;
 	
-	//输入，输入0则停止
+	//输入，为0则停止
 	do {
 		line++;
 		scanf("%d/%d/%d", &year[line], &month[line], &day[line]);

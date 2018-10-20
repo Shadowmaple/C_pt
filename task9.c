@@ -42,24 +42,26 @@ void num(int a[], int b[], int c[], int re[], int s)
 int rs(int run)
 {
 	//判断是否为闰年
-	if (run % 100)
+	if (run % 100) {
 		if (run % 4)
 			return 'F';
-		
 		else return 'T';
 
-	else
+	} else {
 		if (run % 400)
-			return 'T';
-		else return 'F';
-	
+			return 'F';
+		else return 'T';
+	}
 }
 
+//查验错误
 int check(int y, int m, int d)
 {
-	if (m >12 || m<1 || d <1 || y < 0)
+	int ck = 0;
+	if (m >12 || m<1 || d <1 /*|| d > 31*/ || y < 0) {
+		ck = 1;
 		puts("error!");
-	else
+	} else
 		switch (m) {
 		case 1:
 		case 3:
@@ -69,7 +71,7 @@ int check(int y, int m, int d)
 		case 10:
 		case 12: if (d > 31) {
 					 puts("error!");
-					 return 1;
+					 ck =  1;
 				 }
 				break;
 		case 4:
@@ -77,20 +79,22 @@ int check(int y, int m, int d)
 		case 9:
 		case 11: if (d > 30) {
 					 puts("error!");
-					 return 1;
+					 ck = 1;
 				 }
 				break;
-		default :if (rs(y) == 'T')
+		default :if (rs(y) == 'T') {
 					 if (d > 29) {
 						puts("error!");
-						return 1;
+						ck = 1;
 					 }
-				else 
+				 } else {
 					if (d > 28) {
 						puts("error!");
-						return 1;
+						ck = 1;
 					}
+				 }
 	}
+	return ck;
 }
 
 int main()
@@ -105,8 +109,7 @@ int main()
 		scanf("%d/%d/%d", &year[line], &month[line], &day[line]);
 
 		if (!year[line]) break;
-		else 
-			if (check(year[line], month[line], day[line]))
+		else if (check(year[line], month[line], day[line]))
 				line--;
 
 	} while (1);

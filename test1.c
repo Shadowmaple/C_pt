@@ -11,15 +11,15 @@ void sort(int x)
 			printf("%d ", num[j]);
 		putchar('\n');
 	}
-
-	for (int i=0; i < n; i++) {
-		if (a[i] ==0) {
-			a[i] = 1;
-			num[x] = i+1;
-			sort(x+1);
-			a[i] = 0;
+	else
+		for (int i=0; i < n; i++) {
+			if (a[i] ==0) {
+				a[i] = 1;
+				num[x] = i+1;
+				sort(x+1);
+				a[i] = 0;
+			}
 		}
-	}
 }
 
 int main()

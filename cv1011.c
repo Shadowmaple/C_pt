@@ -8,8 +8,6 @@ void ha(int n, int m)
 		for (int i =1; i <= m/2; i++) {
 			int k = n;
 			sum++;
-			k = ((i +'0') + (k + '0') - '0');
-			printf("%d\n", k);
 			ha(k, i);
 		}
 	}

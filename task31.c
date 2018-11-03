@@ -5,8 +5,8 @@ int main()
 	int T;
 	scanf("%d", &T);
 	while (T--) {
-		int A, B;
-		scanf("%d%d", &A, &B);
+		long A, B;
+		scanf("%ld%ld", &A, &B);
 		if (A % B)
 			puts("NO");
 		else

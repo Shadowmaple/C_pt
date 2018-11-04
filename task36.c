@@ -9,28 +9,29 @@ int main()
 	int check[n], count=0;
 	for (int i=0; i < n; i++) {
 		check[i] = 1;
-		scanf("%s %d/%d/%d", name[i], &year, &month, &day);
-		if (year > 2014 || year < 1814)
+		scanf("%s %d/%d/%d", name[i], &year[i], &month[i], &day[i]);
+		if (year[i] > 2014 || year[i] < 1814)
 			check[i] =0;
-		else if (year == 2014) {
-			if (month > 9)
+		else if (year[i] == 2014) {
+			if (month[i] > 9)
 				check[i] =0;
-			else if (month = 9)
-				if (day > 6) check[i] =0;
+			else if (month[i] = 9)
+				if (day[i] > 6) check[i] =0;
 		}
-		else if (year == 1814) {
-			if (month < 9)
+		else if (year[i] == 1814) {
+			if (month[i] < 9)
 				check[i] = 0;
-			else if (month == 9)
-				if (day < 6) check[i] =0;
+			else if (month[i] == 9)
+				if (day[i] < 6) check[i] =0;
 		}
 		if (check[i])
 			count++;
 	}
 
+	int max, min;
 	for (int i=0; i < n; i++)
 		if (check[i]) {
-			int max=i, min=i;
+			max=min=i;
 			break;
 		}
 
@@ -60,6 +61,6 @@ int main()
 
 	}
 
-	printf("%d %s %s\n", count-1, name[max], name[min]);
+	printf("%d %s %s\n", count, name[max], name[min]);
 	return 0;
 }

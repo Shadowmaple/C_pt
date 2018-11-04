@@ -58,7 +58,6 @@ int main()
 				if (day[i] > day[min])
 					min = i;
 		}
-
 	}
 
 	printf("%d %s %s\n", count, name[max], name[min]);

@@ -28,25 +28,36 @@ int main()
 			count++;
 	}
 
-	int max=0, min=0;
-	for (int i=1; i < n; i++) {
-		if (year[i] > year[max])
-			max = i;
-		else if (year[i] == year[max]) {
-			if (month[i] > year[max])
-				max = i;
-			else if (month[i] == month[max]) {
-				if (day[i] > day[max])
-					max = i;
-			}
+	for (int i=0; i < n; i++)
+		if (check[i]) {
+			int max=i, min=i;
+			break;
 		}
 
-		if (year[i] < year[min])
+	for (int i=1; i < n; i++) {
+		if (!check[i])
+			continue;
+
+		if (year[i] < year[max])
+			max = i;
+		else if (year[i] == year[max]) {
+			if (month[i] < month[max])
+				max = i;
+			else if (month[i] == month[max])
+				if (day[i] < day[max])
+					max = i;
+		}
+
+		if (year[i] > year[min])
 			min = i;
 		else if (year[i] == year[min]) {
-			if ()
+			if (month[i] > month[min])
+				min = i;
+			else if (month[i] == month[min])
+				if (day[i] > day[min])
+					min = i;
 		}
-	
+
 	}
 
 	printf("%d %s %s\n", count-1, name[max], name[min]);

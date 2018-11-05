@@ -4,7 +4,7 @@ int main()
 {
 	long n;
 	scanf("%ld", &n);
-	char name[n][5];
+	char name[n][6];
 	int year[n], month[n], day[n];
 	int check[n], count=0;
 	long sum[n];
@@ -37,9 +37,9 @@ int main()
 			min =i;
 	}
 
-	if (count)
-		printf("%d %s %s\n", count, name[max], name[min]);
-	else
+	if (!count)
 		printf("0\n");
+	else
+		printf("%d %s %s\n", count, name[max], name[min]);
 	return 0;
 }

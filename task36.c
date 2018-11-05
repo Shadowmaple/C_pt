@@ -7,25 +7,17 @@ int main()
 	char name[n][5];
 	int year[n], month[n], day[n];
 	int check[n], count=0;
+	long sum[n];
 	for (int i=0; i < n; i++) {
 		check[i] = 1;
 		scanf("%s %d/%d/%d", name[i], &year[i], &month[i], &day[i]);
-		if (year[i] > 2014 || year[i] < 1814)
+		sum[i] = year[i]*10000 + month[i]*100 + day[i];
+
+		if (sum[i] > 20140906 || sum[i] < 18140906)
 			check[i] =0;
-		else if (year[i] == 2014) {
-			if (month[i] > 9)
-				check[i] =0;
-			else if (month[i] = 9)
-				if (day[i] > 6) check[i] =0;
-		}
-		else if (year[i] == 1814) {
-			if (month[i] < 9)
-				check[i] = 0;
-			else if (month[i] == 9)
-				if (day[i] < 6) check[i] =0;
-		}
-		if (check[i])
+		else
 			count++;
+
 	}
 
 	int max, min;
@@ -39,27 +31,15 @@ int main()
 		if (!check[i])
 			continue;
 
-		if (year[i] < year[max])
-			max = i;
-		else if (year[i] == year[max]) {
-			if (month[i] < month[max])
-				max = i;
-			else if (month[i] == month[max])
-				if (day[i] < day[max])
-					max = i;
-		}
-
-		if (year[i] > year[min])
-			min = i;
-		else if (year[i] == year[min]) {
-			if (month[i] > month[min])
-				min = i;
-			else if (month[i] == month[min])
-				if (day[i] > day[min])
-					min = i;
-		}
+		if (sum[i] < sum[max])
+			max =i;
+		if (sum[i] > sum[min])
+			min =i;
 	}
 
-	printf("%d %s %s\n", count, name[max], name[min]);
+	if (count)
+		printf("%d %s %s\n", count, name[max], name[min]);
+	else
+		printf("0\n");
 	return 0;
 }

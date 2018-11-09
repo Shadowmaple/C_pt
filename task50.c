@@ -17,18 +17,14 @@ int main()
 		for (int j=0; j < M; j++){
 			
 			int check=0;//是否是一点，为8时则符合
-			int ck =0;//跳出循环
 			for (int m=i-1; m <= i+1; m++) {
 				for (int n=j-1; n <= j+1; n++) {
 					if (m == i && n == j) continue;
+					if (m==-1 || m==N || n==-1 || n==M)
+						continue;
 					if (abs(a[i][j] - a[m][n]) > TOL)
 						check++;
-					else {
-						ck = 1;
-						break;
-					}
 				}
-				if (ck) break;
 			}
 			if (i ==0 || i == N-1)
 				if (j ==0 || j == M-1) check +=5;
@@ -36,7 +32,6 @@ int main()
 			else if (j == 0 || j == M-1)
 				check += 3;
 			if (check == 8) {
-//				printf("_%d %d %ld\n", j+1, i+1, a[i][j]);
 				int out =0;
 				for (int k=0; k < count; k++) {
 					if (a[y[k]][x[k]] == a[i][j]) {
@@ -56,11 +51,25 @@ int main()
 			}
 		}
 	}
+	for (int i=0; i <N; i++)
+		for (int j=0; j <M; j++){
+			for (int k=0; k <count; k++) {
+				if (i==y[k] && j==x[k]) continue;
+				if (a[y[k]][x[k]]==a[i][j]) {
+					for (int g=k; g < count-1; g++) {
+						x[g] = x[g+1];
+						y[g] = y[g+1];
+					}
+					count--;
+					k--;
+				}
+			}
+		}
 	if (!count)
 		puts("Not Exist");
-	else if (count == 1)
+	else if (count == 1) {
 		printf("(%d, %d): %ld\n", x[0]+1, y[0]+1, a[y[0]][x[0]]);
-	else
+	} else
 		puts("Not Unique");
 
 	return 0;

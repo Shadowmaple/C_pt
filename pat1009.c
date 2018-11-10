@@ -13,7 +13,7 @@ int main()
 		if (s[i]==' ' || i==length-1) {
 			if (i==length-1)
 				d = i+1;
-			else d=i;
+			else d =i;
 			m[n] = 0;
 			for (int j=k, p=0; j < d; p++,j++) {
 				word[n][p] = s[j];

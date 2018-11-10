@@ -10,3 +10,6 @@
 09. 第几天，给定日期求该日是该年的第几天
 10. 求个人的平均成绩和各科平均分数以及各科均高于平均分的人数
 11. 寻找大富翁
+12. [200~害死人不偿命的(3n+1)猜想](https://pintia.cn/problem-sets/994805260223102976/problems/994805325918486528)
+13. [A+B 和 C](https://pintia.cn/problem-sets/994805260223102976/problems/994805312417021952)
+14. [数据的交换输出](http://acm.hdu.edu.cn/showproblem.php?pid=2016)

@@ -29,11 +29,27 @@ int main()
 		for (int i =0; i < N; i++) {
 			int count =0;
 			mean[i] = 1;
+			//总价值vs限额
 			if (sum[i] > Q) {
 				mean[i] = 0;
 				continue;
 			}
-			
+
+			//单项物品是否超过600
+			int sum_A=0,sum_B=0,sum_C=0;
+			for (int j=0; j < n[i]; j++) {
+				switch(type[i][j] == 'A') {
+					case 'A': sum_A += price[i][j];break;
+					case 'B': sum_B += price[i][j];break;
+					case 'C': sum_C += price[i][j];break;
+				}
+			}
+			if (sum_A>600 || sum_B>600 || sum_C>600) {
+				mean[i] =0;
+				continue;
+			}
+
+			//不符合要求的物品类型
 			while (count < n[i]) {
 				if (type[i][count]!='A' && type[i][count]!='B' && type[i][count]!='C')
 				{
@@ -46,7 +62,6 @@ int main()
 
 		double max = 0, sum_ = 0;
 		double sort[N];
-		int 
 		for (int j=0; j < N; j++) {
 			if (!mean[j]) continue;
 			sort[] = 

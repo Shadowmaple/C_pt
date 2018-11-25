@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int main(){
+int main() {
 	int n, count = 2;
 	scanf("%d", &n);
 	int a[n][n];

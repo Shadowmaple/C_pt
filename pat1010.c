@@ -7,31 +7,37 @@ int main()
 	scanf("%[^\n]", st);
 	int count=0, minus=0;
 	int n[100], m[100];
-	for (int i=0, cycle=1; i<strlen(st); i++) {
-		if (st[i]==' ') {
-			k = i;
-			continue;
-		}
+	for (int i=0, cycle=1, k=0; i<=strlen(st); i++) {
 		if (st[i]=='-') {
 			minus = 1;
+			k++;
 			continue;
 		}
-		if (cycle == 1) {
-			n[count] = st[i]-'0';
-			if (minus) {
-				n[count] = -n[count];
-				minus=0;
+		if (st[i]==' ' || st[i]=='\0') {
+			int num=0;
+			for (int j=k; j<i; j++) {
+				num = num*10 + (st[j]-'0');
 			}
-			cycle = 2;
-		} else {
-			m[count] = st[i]-'0';
-			if (minus) {
-				m[count] = -m[count];
-				minus = 0;
+		
+			if (cycle == 1) {
+				n[count] = num;
+				if (minus) {
+					n[count] = -n[count];
+					minus=0;
+				}
+				cycle = 2;
+			} else {
+				m[count] = num;
+				if (minus) {
+					m[count] = -m[count];
+					minus = 0;
+				}
+				cycle = 1;
+				n[count] *= m[count];
+				m[count++]--;
 			}
-			cycle = 1;
-			n[count] *= m[count];
-			m[count++]--;
+			k = i+1;
+
 		}
 	}
 	int flag = 0;

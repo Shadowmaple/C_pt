@@ -14,11 +14,11 @@ int main()
 	for (int i=0; i<strlen(str[0]); i++) {
 		char c = str[0][i];
 		if (!count) {
-			if (isupper(c) && c==str[1][i]) {
+			if (c>='A' && c<='G' && c==str[1][i]) {
 				a[count++] = c;
 			}
 		} else {
-			if ((isupper(c) || isdigit(c)) && c==str[1][i]) {
+			if ((isdigit(c) || c>='A' && c<='N') && c==str[1][i]) {
 				a[count] = c;
 				break;
 			}

@@ -1,6 +1,3 @@
-//疑惑待解决：为什么将break分别放入if选择语句内便可通过？（line30, line33）
-
-
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>

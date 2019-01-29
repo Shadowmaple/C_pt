@@ -14,35 +14,34 @@ int main()
 	for (;i<strlen(str[0]); i++) {
 		char c = str[0][i];
 		if (c>='A' && c<='G' && c==str[1][i]) {
-			a[0] = c;
-			break;
-		}
-	}
-	for (i=i+1; i<strlen(str[0]); i++) {
-		char c = str[0][i];
-		if (c==str[1][i] && (isdigit(c) || c>='A' && c<='N')) {
-			a[1] = c;
+			int week = c-'A'+1;
+			printf("%s ", day[week-1]);
 			break;
 		}
 	}
 
-	int index;
+	for (i=i+1; i<strlen(str[0]); i++) {
+		char c = str[0][i];
+		if (c==str[1][i] && (isdigit(c) || c>='A' && c<='N')) {
+			if (isdigit(c))
+				printf("%02d:", c-'0'+1);
+			else if (c>='A' && c<='N')
+				printf("%02d:", c-'A'+10);
+			break;
+		}
+	}
+
+//	int index;
 	for (int i=0; i<strlen(str[2]); i++) {
 		char c = str[2][i];
 		if (isalpha(c) && c==str[3][i]) {
-			index = i;
+//			index = i;
+			printf("%02d\n", i);			
 			break;
 		}
 	}
 	
-	int week = a[0]-'A'+1;
-	int hour;
-	if (isdigit(a[1]))
-		hour = a[1]-'0'+1;
-	else
-		hour = a[1]-'A'+10;
-
-	printf("%s %02d:%02d\n", day[week-1], hour, index);
+//	printf("%s %02d:%02d\n", day[week-1], hour, index);
 
 	return 0;
 }

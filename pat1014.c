@@ -1,3 +1,6 @@
+//疑惑待解决：为什么将break分别放入if选择语句内便可通过？（line30, line33）
+
+
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
@@ -22,11 +25,13 @@ int main()
 	for (i=i+1; i<strlen(str[0]); i++) {
 		char c = str[0][i];
 		if (c==str[1][i]) {
-			if (isdigit(c))
-				printf("%02d:", c-'0'+1);
-			else if (c>='A' && c<='N')
+			if (isdigit(c)) {
+				printf("%02d:", c-'0');
+				break;
+			} else if (c>='A' && c<='N') {
 				printf("%02d:", c-'A'+10);
-			break;
+				break;
+			}
 		}
 	}
 

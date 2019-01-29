@@ -10,18 +10,19 @@ int main()
 	}
 	char day[7][4] = {"MON","TUE","WED","THU","FRI","SAT","SUN"};
 	char a[2];
-	int count=0;
-	for (int i=0; i<strlen(str[0]); i++) {
+	int i=0;
+	for (;i<strlen(str[0]); i++) {
 		char c = str[0][i];
-		if (!count) {
-			if (c>='A' && c<='G' && c==str[1][i]) {
-				a[count++] = c;
-			}
-		} else {
-			if ((isdigit(c) || c>='A' && c<='N') && c==str[1][i]) {
-				a[count] = c;
-				break;
-			}
+		if (c>='A' && c<='G' && c==str[1][i]) {
+			a[0] = c;
+			break;
+		}
+	}
+	for (i=i+1; i<strlen(str[0]); i++) {
+		char c = str[0][i];
+		if (c==str[1][i] && (isdigit(c) || c>='A' && c<='N')) {
+			a[1] = c;
+			break;
 		}
 	}
 

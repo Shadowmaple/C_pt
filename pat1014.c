@@ -13,24 +13,24 @@ int main()
 	int count=0;
 	for (int i=0; i<strlen(str[0]); i++) {
 		char c = str[0][i];
-		if (count==2) break;
 		if (!count) {
-			if (isupper(c) && strchr(str[1], c) != NULL) {
+			if (isupper(c) && c==str[1][i]) {
 				a[count++] = c;
 			}
 		} else {
-			if ((isupper(c) || isdigit(c)) && strchr(str[1], c) != NULL) {
-				a[count++] = c;
+			if ((isupper(c) || isdigit(c)) && c==str[1][i]) {
+				a[count] = c;
+				break;
 			}
 		}
 	}
 
 	int index;
 	for (int i=0; i<strlen(str[2]); i++) {
-		char c = str[0][i];
-		char *x = strchr(str[3], c);
-		if (isalpha(c) && x!= NULL) {
-			index = (index > i) ? index : i;
+		char c = str[2][i];
+		if (isalpha(c) && c==str[3][i]) {
+			index = i;
+			break;
 		}
 	}
 	

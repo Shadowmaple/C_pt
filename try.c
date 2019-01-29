@@ -11,7 +11,8 @@ int main()
 //	x = strchr(b, 'y');
 //	printf("%s %ld\n", x, strlen(b)-strlen(x)+1);
 //	printf("%d, %d\n", isalpha(c), isupper(c));
-	printf("%02d\n", 23);
+//	printf("%02d\n", 23);
+	printf("%d\n", 'D'-'0');	
 
 	return 0;
 }

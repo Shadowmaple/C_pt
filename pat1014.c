@@ -14,8 +14,14 @@ int main()
 	for (int i=0; i<strlen(str[0]); i++) {
 		char c = str[0][i];
 		if (count==2) break;
-		if (isupper(c) && strchr(str[1], c) != NULL) {
-			a[count++] = c;
+		if (!count) {
+			if (isupper(c) && strchr(str[1], c) != NULL) {
+				a[count++] = c;
+			}
+		} else {
+			if ((isupper(c) || isdigit(c)) && strchr(str[1], c) != NULL) {
+				a[count++] = c;
+			}
 		}
 	}
 
@@ -24,14 +30,18 @@ int main()
 		char c = str[0][i];
 		char *x = strchr(str[3], c);
 		if (isalpha(c) && x!= NULL) {
-			index = strlen(str[3]) - strlen(x);
 			index = (index > i) ? index : i;
 		}
 	}
 	
 	int week = a[0]-'A'+1;
-	int hour = a[1]-'A'+1+9;
-	printf("%s %d:%02d\n", day[week-1], hour, index);
+	int hour;
+	if (isdigit(a[1]))
+		hour = a[1]-'0'+1;
+	else
+		hour = a[1]-'A'+10;
+
+	printf("%s %02d:%02d\n", day[week-1], hour, index);
 
 	return 0;
 }

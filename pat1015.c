@@ -40,6 +40,8 @@ int main()
 
 	for (int i=0; i<n; i++) {
 		scanf("%s %d %d", id_x, &morality_x, &talent_x);
+		if (morality_x<l || talent_x<l)
+			continue;
 		if (morality_x>=h && talent_x>=h) {		//德才全尽
 			int num = level[0]++;
 			strcpy(id_1[num], id_x);
@@ -48,25 +50,24 @@ int main()
 		}
 		else if (morality_x>=h) {				//德胜才
 			int num = level[1]++;
-			strcpy(id_1[num], id_x);
+			strcpy(id_2[num], id_x);
 			morality[1][num] = morality_x;
 			talent[1][num] = talent_x;
 		}
-		else if (morality_x<l || talent_x<l)	//德才均未达标			
-			;
 		else if (morality_x>=talent_x) {		//才德兼亡但德胜才
 			int num = level[2]++;
-			strcpy(id_1[num], id_x);
+			strcpy(id_3[num], id_x);
 			morality[2][num] = morality_x;
 			talent[2][num] = talent_x;
 		}
 		else {									//其他达线者
 			int num = level[3]++;
-			strcpy(id_1[num], id_x);
+			strcpy(id_4[num], id_x);
 			morality[3][num] = morality_x;
 			talent[3][num] = talent_x;
 		}
 	}
+
 	sort_(&id_1[level[0]], morality[0], talent[0], level[0]);
 	sort_(&id_2[level[1]], morality[1], talent[1], level[1]);
 	sort_(&id_3[level[2]], morality[2], talent[2], level[2]);

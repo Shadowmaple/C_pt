@@ -16,6 +16,17 @@ void display(NODE *head)
         p = p->next;
     }
     putchar('\n');
+    free(p);
+}
+
+void free_linkList(NODE *head)
+{
+    NODE *p = head, *p_free;
+    while (p != NULL) {
+        p_free = p;
+        p = p->next;
+        free(p_free);
+    }
 }
 
 void delete(NODE *head)
@@ -29,7 +40,7 @@ void delete(NODE *head)
             break;
         
         NODE *p = head;
-        for (int i=0; i < position-1 && p != NULL; i++)
+        for (int i=0; i < position-1 && p->next != NULL; i++)
             p = p->next;
 
         if (p->next == NULL) {
@@ -46,7 +57,7 @@ void delete(NODE *head)
     }
 }
 
-void insert(NODE *head, NODE *tail)
+void insert(NODE *head)
 {
     NODE *new;
     int number, position;
@@ -66,8 +77,8 @@ void insert(NODE *head, NODE *tail)
             puts("该节点不存在！");
             continue;
         }
-        
-        new = (NODE *) malloc(sizeof(NODE));
+
+        new = (NODE *) malloc (sizeof(NODE));
         new->number = number;
         new->next = p->next;
         p->next = new;
@@ -76,23 +87,25 @@ void insert(NODE *head, NODE *tail)
     }
 }
 
-void create(NODE *head, NODE *tail, NODE *new)
+void create(NODE *head, NODE *tail)
 {
-    int *number;
+    NODE *new;
+    int number;
 
-    head = (NODE *) malloc(sizeof(NODE));
+    //若是在此处为head分配内存则后续的运行会报错
+    //head = (NODE *) malloc(sizeof(NODE));
     head->next = NULL;
     tail = head;
 
     puts("输入数据：");
     while(1) {
-        scanf("%d", number);
-        if (*number == -1)
+        scanf("%d", &number);
+        if (number == -1)
             break;
         
         new = (NODE *) malloc(sizeof(NODE));
         new->next = NULL;
-        new->number = *number;
+        new->number = number;
 
         tail->next = new;
         tail = new;
@@ -102,19 +115,20 @@ void create(NODE *head, NODE *tail, NODE *new)
 
 int main()
 {
-    NODE *head, *tail, *new;
+    NODE *head, *tail;
     int option;
-
+    
+    head = (NODE *) malloc(sizeof(NODE));
     create(head, tail);
 
-    puts("选项：退出--0，插入--1，删除--2，销毁--3");
     while (1) {
+        puts("选项：退出--0，插入--1，删除--2，销毁--3");
         scanf("%d", &option);
         switch (option) {
-            case 0: break;
-            case 1: insert(head, tail, new); break;
+            case 0: return 0;
+            case 1: insert(head); break;
             case 2: delete(head); break;
-            case 3: free(head); break;
+            case 3: free_linkList(head); return 0;
             default: continue;
         }
     }

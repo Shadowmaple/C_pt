@@ -54,7 +54,8 @@ int main()
         }
 
         NODE *p = head;
-        for (int i=0; i < p_index-1 && p != NULL; i++) {
+        int i;
+        for (i=0; i < p_index-1 && p->next != NULL; i++) {
             p = p->next;
         }
         if (p->next == NULL) {

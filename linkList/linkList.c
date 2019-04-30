@@ -1,43 +1,113 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main()
+struct linkList
 {
-    struct linkList
-    {
-        int number;
-        struct linkList *next;
-    };
-
-    struct linkList *head, *tail, *pnew;
     int number;
+    struct linkList *next;
+};
+typedef struct linkList NODE;
 
-    head = (struct linkList *)malloc (sizeof(struct linkList));
+void display(NODE *head)
+{
+    NODE *p = head->next;
+    while (p != NULL) {
+        printf("%d ", p->number);
+        p = p->next;
+    }
+    putchar('\n');
+}
+
+void delete(NODE *head)
+{
+    int position;
+
+    puts("输入要删除的节点（从1开始）：");
+    while (1) {
+        scanf("%d", &position);
+        if (position < 1)
+            break;
+        
+        NODE *p = head;
+        for (int i=0; i < position-1 && p != NULL; i++)
+            p = p->next;
+        
+            
+    }
+}
+
+void insert(NODE *head, NODE *tail)
+{
+    NODE *new;
+    int number, position;
+
+    puts("输入插入的位置和数字（-1退出）：");
+    while (1) {
+        scanf("%d", &position);
+        if (position == -1)
+            break;
+        scanf("%d", &number);
+
+        NODE *p = head;
+        for (int i=0; i < position && p != NULL; i++)
+            p = p->next;
+
+        if (!p) {
+            puts("该节点不存在！");
+            continue;
+        }
+        
+        new = (NODE *) malloc(sizeof(NODE));
+        new->number = number;
+        new->next = p->next;
+        p->next = new;
+        
+        display(head);
+    }
+}
+
+void create(NODE *head, NODE *tail, NODE *new)
+{
+    int *number;
+
+    head = (NODE *) malloc(sizeof(NODE));
     head->next = NULL;
     tail = head;
-    //初始时尾链即首链，尾链指针指向首链地址
 
+    puts("输入数据：");
     while(1) {
-        scanf("%d", &number);
-        if (number == -1)
+        scanf("%d", number);
+        if (*number == -1)
             break;
+        
+        new = (NODE *) malloc(sizeof(NODE));
+        new->next = NULL;
+        new->number = *number;
 
-        pnew = (struct linkList *)malloc (sizeof(struct linkList));
-        pnew->number = number;
-        pnew->next = NULL;
-
-        //该链与上一链（尾链）进行链接，上一链的next指向该链地址
-        tail->next = pnew;
-        tail = pnew;
-        //尾指针指向该链地址，该该链成为尾链
+        tail->next = new;
+        tail = new;
     }
+    display(head);
+}
 
-    //输出链表中的数据域
-    for (struct linkList *p=head->next; p != NULL; p = p->next) {
-        printf("%d\n", p->number);
+int main()
+{
+    NODE *head, *tail, *new;
+    int option;
+
+    create(head, tail);
+
+    puts("选项：退出--0，插入--1，删除--2，销毁--3");
+    while (1) {
+        scanf("%d", &option);
+        switch (option) {
+            case 0: break;
+            case 1: insert(head, tail, new); break;
+            case 2: delete(head); break;
+            case 3: free(head); break;
+            default: continue;
+        }
     }
-    if (!(head->next))
-        puts("No any number!\a");
 
     return 0;
 }

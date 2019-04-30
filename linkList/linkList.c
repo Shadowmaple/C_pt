@@ -31,8 +31,18 @@ void delete(NODE *head)
         NODE *p = head;
         for (int i=0; i < position-1 && p != NULL; i++)
             p = p->next;
+
+        if (p->next == NULL) {
+            puts("该节点不存在！");
+            continue;
+        }
         
-            
+        NODE *p_free = p->next;
+        p->next = p_free->next;
+        //释放内存
+        free(p_free);
+        
+        display(head);
     }
 }
 

@@ -19,6 +19,7 @@ void display(NODE *head)
     free(p);
 }
 
+//销魂链表，释放内存
 void free_linkList(NODE *head)
 {
     NODE *p = head, *p_free;
@@ -29,6 +30,7 @@ void free_linkList(NODE *head)
     }
 }
 
+//删除某个节点
 void delete(NODE *head)
 {
     int position;
@@ -57,6 +59,7 @@ void delete(NODE *head)
     }
 }
 
+//插入某个节点
 void insert(NODE *head)
 {
     NODE *new;
@@ -87,9 +90,36 @@ void insert(NODE *head)
     }
 }
 
-void create(NODE *head, NODE *tail)
+//在链尾添加节点
+void add(NODE *head)
 {
-    NODE *new;
+    NODE *new, *tail = head;
+    int number;
+
+    while (tail->next != NULL)
+        tail = tail->next;
+
+    puts("输入数据：");
+    while (1) {
+        scanf("%d", &number);
+        if (number == -1)
+            break;
+
+        new = (NODE *) malloc(sizeof(NODE));
+        new->next = NULL;
+        new->number = number;
+
+        tail->next = new;
+        tail = new;
+
+        display(head);
+    }
+}
+
+//创建链表
+void create(NODE *head)
+{
+    NODE *new, *tail;
     int number;
 
     //若是在此处为head分配内存则后续的运行会报错
@@ -115,20 +145,22 @@ void create(NODE *head, NODE *tail)
 
 int main()
 {
-    NODE *head, *tail;
+    NODE *head;
     int option;
     
     head = (NODE *) malloc(sizeof(NODE));
-    create(head, tail);
+
+    create(head);
 
     while (1) {
-        puts("选项：退出--0，插入--1，删除--2，销毁--3");
+        puts("选项：退出--0，添加--1，插入--2，删除--3，销毁--4");
         scanf("%d", &option);
         switch (option) {
             case 0: return 0;
-            case 1: insert(head); break;
-            case 2: delete(head); break;
-            case 3: free_linkList(head); return 0;
+            case 1: add(head); break;
+            case 2: insert(head); break;
+            case 3: delete(head); break;
+            case 4: free_linkList(head); return 0;
             default: continue;
         }
     }

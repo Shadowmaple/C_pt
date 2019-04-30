@@ -44,7 +44,7 @@ int main()
     show(head);
 
     int position;
-    puts("输入要插入的位置和数字(-1为停止)：");
+    puts("输入要插入之前的位置和数字(-1为停止)：");
     while (1) {
         scanf("%d", &position);
         if (position == -1)
@@ -52,7 +52,8 @@ int main()
         scanf("%d", &number);
 
         NODE *p = head;
-        for (int i=0; i<=position && p != NULL; i++)
+        //position为0表示头指针
+        for (int i=0; i < position && p != NULL; i++)
             p = p->next;
         if (p == NULL) {
             puts("该节点不存在");

@@ -1,3 +1,5 @@
+//德才论，过了两个测试点，一个wrong，两个超时
+
 #include <stdio.h>
 #include <string.h>
 
@@ -12,7 +14,7 @@ void sort_(char (*id)[9], int m[], int t[], int total)
 			else if (sum == m[j]+t[j]) {
 				if (m[i] < m[j])
 					k = j;
-				else if (id[i] > id[j])
+				else if (id[i] - '0' > id[j] - '0')
 					k = j;
 			}
 		}
@@ -23,6 +25,11 @@ void sort_(char (*id)[9], int m[], int t[], int total)
 			strcpy(c, id[i]);
 			strcpy(id[i],id[k]);
 			strcpy(id[k], c);
+
+//			puts("---");
+//			for (int i=0; i<total; i++)
+//				printf("%s %d %d\n", id[i], m[i], t[i]);
+//			puts("---");
 		}
 	}
 }
@@ -68,21 +75,24 @@ int main()
 		}
 	}
 
-	sort_(&id_1[level[0]], morality[0], talent[0], level[0]);
-	sort_(&id_2[level[1]], morality[1], talent[1], level[1]);
-	sort_(&id_3[level[2]], morality[2], talent[2], level[2]);
-	sort_(&id_4[level[3]], morality[3], talent[3], level[3]);
+	//二维数组传参，注意此坑
+	sort_(id_1, morality[0], talent[0], level[0]);
+	sort_(id_2, morality[1], talent[1], level[1]);
+	sort_(id_3, morality[2], talent[2], level[2]);
+	sort_(id_4, morality[3], talent[3], level[3]);
 
 	printf("%d\n", level[0]+level[1]+level[2]+level[3]);
 	for (int i=0; i<level[0]; i++)
 		printf("%s %d %d\n", id_1[i], morality[0][i], talent[0][i]);
+//	puts("***");
 	for (int i=0; i<level[1]; i++)
 		printf("%s %d %d\n", id_2[i], morality[1][i], talent[1][i]);
+//	puts("***");
 	for (int i=0; i<level[2]; i++)
 		printf("%s %d %d\n", id_3[i], morality[2][i], talent[2][i]);
+//	puts("***");
 	for (int i=0; i<level[3]; i++)
 		printf("%s %d %d\n", id_4[i], morality[3][i], talent[3][i]);
-
 
 	return 0;
 }

@@ -1,3 +1,5 @@
+//改进地方：运用结构体，id用int型，使用库函数qsort
+
 # include <stdio.h>
 # include <stdlib.h>
 

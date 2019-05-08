@@ -1,0 +1,46 @@
+# include <stdio.h>
+# include <stdlib.h>
+
+struct cake
+{
+    int storage;    //每种月饼的库存量
+    float price;     //每种月饼的总售价
+    float unit_price; //月饼的单价
+} mooncake[1000];
+
+void compare(const void *a, const void *b)
+{
+    struct cake price1 = *(float *) a;
+    struct cake price2 = *(float *) b;
+    return price1.unit_price < price2.unit_price;
+    //降序
+}
+
+int main()
+{
+    int kind, need;
+    //输入种类数和需求量
+    scanf("%d%d", &kind, &need);    
+    
+    //输入库存量
+    for (int i=0; i < kind; i++)
+        scanf("%d", mooncake[i].storage);
+    //输入总售价，并计算单价
+    for (int i=0; i < kind; i++) {
+        scanf("%d", mooncake[i].price);
+        mooncake[i].unit_price = mooncake[i].price / mooncake[i].storage;
+    }
+    qsort(mooncake, kind, sizeof(mooncake[0]), compare);
+
+    float total = 0;
+    for (int i=0; ; i++) {
+        if (mooncake[i].storage >= need) {
+            total = need * mooncake[i].unit_price;
+            break;
+        }
+        need -= mooncake[i].storage;
+        
+    }
+    printf("%.2f\n", total);
+    return 0;
+}

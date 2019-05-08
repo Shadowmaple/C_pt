@@ -3,7 +3,8 @@
 
 struct cake
 {
-    int storage;    //每种月饼的库存量
+    //若库存量为整型，则有第二个测试点过不去
+    float storage;    //每种月饼的库存量
     float price;     //每种月饼的总售价
     float unit_price; //月饼的单价
 } mooncake[1000];
@@ -24,7 +25,7 @@ int main()
     
     //输入库存量
     for (int i=0; i < kind; i++)
-        scanf("%d", &mooncake[i].storage);
+        scanf("%f", &mooncake[i].storage);
     //输入总售价，并计算单价
     for (int i=0; i < kind; i++) {
         scanf("%f", &mooncake[i].price);
@@ -40,7 +41,6 @@ int main()
         }
         total += mooncake[i].storage * mooncake[i].unit_price;
         need -= mooncake[i].storage;
-
     }
 
     printf("%.2f\n", total);

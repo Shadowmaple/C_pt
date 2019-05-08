@@ -55,13 +55,13 @@ int main()
 			morality[0][num] = morality_x;
 			talent[0][num] = talent_x;
 		}
-		else if (morality_x>=h) {				//德胜才
+		else if (morality_x >= h) {				//德胜才
 			int num = level[1]++;
 			strcpy(id_2[num], id_x);
 			morality[1][num] = morality_x;
 			talent[1][num] = talent_x;
 		}
-		else if (morality_x>=talent_x) {		//才德兼亡但德胜才
+		else if (morality_x >= talent_x) {		//才德兼亡但德胜才
 			int num = level[2]++;
 			strcpy(id_3[num], id_x);
 			morality[2][num] = morality_x;

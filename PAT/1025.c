@@ -31,6 +31,8 @@ int main()
             link[j] = a;
             break;
         }
+        if(link[i]->next == -1)   /* there could be useless nodes */
+            N = i + 1;
         //printf("---%05d %d %05d\n", link[i]->address, link[i]->data, link[i]->next);
     }
     //printf("---%05d %d -1\n", link[N-1]->address, link[N-1]->data);

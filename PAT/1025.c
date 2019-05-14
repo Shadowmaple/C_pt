@@ -16,7 +16,6 @@ int main()
 
     for (int i=0; i < N; i++) {
         link[i] = link_x + i;
-        //puts("---");
         scanf("%d%d%d", &link[i]->address, &link[i]->data, &link[i]->next);
     }
 
@@ -31,7 +30,8 @@ int main()
             link[j] = a;
             break;
         }
-        if(link[i]->next == -1)   /* there could be useless nodes */
+        //去掉后面不属于链表的节点
+        if(link[i]->next == -1)
             N = i + 1;
         //printf("---%05d %d %05d\n", link[i]->address, link[i]->data, link[i]->next);
     }
@@ -39,7 +39,7 @@ int main()
 
     //反转链表，对数组交换顺序
     for (int i=0; i < N / K; i++) {
-        for (int j = i*K, m = j+K-1; j < K / 2; j++, m--) {
+        for (int j = i*K, m = j+K-1; j < i*K + K/2; j++, m--) {
             //swap(link[j], link[m]);
             struct linkList *a = link[j];
             link[j] = link[m];

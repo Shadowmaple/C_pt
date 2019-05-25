@@ -21,15 +21,16 @@ int match(char *bad_key, char c)
 
 int main()
 {
-    char bad_key[100];
+    char bad_key[1000];
     char sentence[100001];
     scanf("%s%s", bad_key, sentence);
     char result[100001];
 
     int length = 0;
     for (int i=0; i < strlen(sentence); i++) {
-        if (match(bad_key, sentence[i])) {
-            result[length++] = sentence[i];
+        char c = sentence[i];
+        if (c == '_' || c == '+' || match(bad_key, c)) {
+            result[length++] = c;
         }
     }
     if (!length)

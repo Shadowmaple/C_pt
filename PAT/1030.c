@@ -16,15 +16,12 @@ int main()
     }
     qsort(num, N, sizeof(int), compar);
 
-    for (int i=0; i < N; i++)
-        printf("%d ", num[i]);
-    putchar('\n');
-
     int length = 0;
     for (int i=0; i + length < N; i++) {
         int j = i + length;
         for (; j < N; j++) {
-            if (num[i] * p < num[j] && i != j)
+            //转换为long类型
+            if (1L * num[i] * p < num[j] && i != j)
                 break;
         }
         j--;

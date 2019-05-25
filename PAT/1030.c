@@ -3,7 +3,7 @@
 
 int compar(const void *a, const void *b)
 {
-    return *(int *) a < *(int *) b;
+    return *(int *) a - *(int *) b;
 }
 
 int main()
@@ -12,16 +12,22 @@ int main()
     scanf("%d%d", &N, &p);
     int num[N];
     for (int i=0; i < N; i++) {
-        scanf("%d", &num[i]);
+        scanf("%d", num + i);
     }
-    qsort(num, N, sizeof(num), compar);
+    qsort(num, N, sizeof(int), compar);
+
+    for (int i=0; i < N; i++)
+        printf("%d ", num[i]);
+    putchar('\n');
 
     int length = 0;
-    for (int i=0; i + length - 1 < N; i++) {
-        for (int j= i + length - 1; j < N; j++) {
-            if (num[i] * p < num[j])
+    for (int i=0; i + length < N; i++) {
+        int j = i + length;
+        for (; j < N; j++) {
+            if (num[i] * p < num[j] && i != j)
                 break;
         }
+        j--;
         length = j - i + 1;
     }
     printf("%d\n", length);

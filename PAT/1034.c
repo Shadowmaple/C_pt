@@ -1,10 +1,10 @@
 # include <stdio.h>
 
 //化简分数
-void simplify(int *a, int *b)
+void simplify(long *a, long *b)
 {
     int sign = (*a >= 0) ? 1 : 0;
-    int x = *a, y = *b;
+    long x = *a, y = *b;
     //若符号为负号，则取其相反数
     if (!sign)
         x = -x;
@@ -20,7 +20,7 @@ void simplify(int *a, int *b)
 }
 
 //假分数转为真分数
-void convert(int *a, int *b, int *c)
+void convert(long *a, long *b, long *c)
 {
     *c = *a / *b;
     *a %= *b;
@@ -31,26 +31,26 @@ void convert(int *a, int *b, int *c)
     }
 }
 
-void pr_num(int a, int b, int c)
+void pr_num(long a, long b, long c)
 {
     convert(&a, &b, &c);
     if (c < 0 || a < 0)
         printf("(");
     if (c)
-        printf("%d", c);
+        printf("%ld", c);
     if (c && a)
         putchar(' ');
     if (a)
-        printf("%d/%d", a, b);
+        printf("%ld/%ld", a, b);
     if (c < 0 || a < 0)
         printf(")");
     if (!c && !a)
         printf("0");
 }
 
-void display(int a1, int b1, int a2, int b2, char sign)
+void display(long a1, long b1, long a2, long b2, char sign)
 {
-    int c1 = 0, c2 = 0;
+    long c1 = 0, c2 = 0;
     //输出等号左边
     pr_num(a1, b1, c1);
     printf(" %c ", sign);
@@ -62,8 +62,8 @@ void display(int a1, int b1, int a2, int b2, char sign)
 
 int main()
 {
-    int a1, b1, a2, b2;
-    scanf("%d/%d %d/%d", &a1, &b1, &a2, &b2);
+    long a1, b1, a2, b2;
+    scanf("%ld/%ld %ld/%ld", &a1, &b1, &a2, &b2);
 
     simplify(&a1, &b1);
     simplify(&a2, &b2);
@@ -72,7 +72,7 @@ int main()
     int sign_2 = (a2 >= 0) ? 1 : 0;
     //公共的分母数
     int b_both = b1 * b2;
-    int a3, b3, c3;
+    long a3, b3, c3;
 
     //加
     display(a1, b1, a2, b2, '+');

@@ -1,12 +1,13 @@
 # include <stdio.h>
 
 //辗转相除法，求最大公因数
-int num(long a, long b)
+long num(long a, long b)
 {
-    int x = a % b;
+    long x = a % b;
     while (x) {
         a = b;
         b = x;
+        x = a % b;
     }
     return b;
 }
@@ -28,21 +29,21 @@ void display(long a, long b)
         positive *= -1;
     }
 
-    int n = num(a, b)
+    long n = num(a, b);
     a /= n;
     b /= n;
 
     if (positive == -1) printf("(-");
-    if (a / b && a & b) printf("%ld %ld/%ld", a / b, a % b, b);
-    else if (a / b)     printf("%ld", a / b);
-    else                printf("%ld/%ld", a / b, b);
+    if (a / b && a % b) printf("%ld %ld/%ld", a / b, a % b, b);
+    else if (a % b)     printf("%ld/%ld", a % b, b);
+    else                printf("%ld", a / b);
     if (positive == -1) printf(")");
 }
 
 int main()
 {
     long a1, b1, a2, b2;
-    char sign[4] = "+-*/";
+    char sign[4] = {'+', '-', '*', '/'};
     scanf("%ld/%ld %ld/%ld", &a1, &b1, &a2, &b2);
 
     for (int i=0; i < 4; i++) {
@@ -57,6 +58,7 @@ int main()
             case '*': display(a1 * a2,           b1 * b2); break;
             case '/': display(a1 * b2,           a2 * b1); break;
         }
+        putchar('\n');
     }
     return 0;
 }

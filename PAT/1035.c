@@ -28,7 +28,8 @@ int main()
         puts("Insertion Sort");
         qsort(half_sort, length, sizeof(int), compar);
     } else {
-
+        puts("Merge Sort");
+        
     }
 
     for (i=0; i < N; i++)

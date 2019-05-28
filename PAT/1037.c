@@ -16,7 +16,10 @@ int main()
     sickle_result = minus % (17 * 29) / 29;
     knut_result = minus % 29;
 
-    printf("%d.%d.%d/n", gallen_result, sickle_result, knut_result);
+    if (sum_a < sum_p)
+        printf("%d.%d.%d\n", gallen_result, -sickle_result, -knut_result);
+    else
+        printf("%d.%d.%d\n", gallen_result, sickle_result, knut_result);
 
     return 0;
 }

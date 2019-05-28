@@ -22,8 +22,21 @@ int main()
             }
         }
     }
-    for (int i=0; i < K; i++)
+
+
+    for (int i=0; i < K; i++) {
+        if (!total[i]) {
+            for (int j=0; j < N; j++) {
+                if (num[j] == num[i]) {
+                    total[i] = total[j];
+                    break;
+                }
+            }
+        }
+
         printf("%d%c", total[i], (i==K-1)? '\n':' ');
+
+    }
     
     return 0;
 }

@@ -8,9 +8,11 @@ int main()
     for (int i=0; i < N; i++)
         scanf("%d", num + i);
     scanf("%d", &K);
-    int grade[K], total[K] = {0};
-    for (int i=0; i < K; i++)
+    int grade[K], total[K];
+    for (int i=0; i < K; i++) {
         scanf("%d", grade + i);
+        total[i] = 0;
+    }
 
     for (int i=0; i < N; i++) {
         for (int j=0; j < K; j++) {

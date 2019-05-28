@@ -7,6 +7,7 @@ int main()
     int num[N];
     for (int i=0; i < N; i++)
         scanf("%d", num + i);
+
     scanf("%d", &K);
     int grade[K], total[K];
     for (int i=0; i < K; i++) {
@@ -23,19 +24,15 @@ int main()
         }
     }
 
-
     for (int i=0; i < K; i++) {
         if (!total[i]) {
-            for (int j=0; j < N; j++) {
-                if (num[j] == num[i]) {
+            for (int j=0; j < N; j++)
+                if (grade[j] == grade[i]) {
                     total[i] = total[j];
                     break;
                 }
-            }
         }
-
         printf("%d%c", total[i], (i==K-1)? '\n':' ');
-
     }
     
     return 0;

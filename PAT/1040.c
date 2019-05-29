@@ -5,23 +5,19 @@ int main()
 {
     char str[100001];
     scanf("%s", str);
-    int num_pa, num_pat, total;
-    num_pa = num_pat = total = 0;
+    long num_p, num_pa, total;
+    num_p = num_pa = total = 0;
 
     int length = strlen(str);
     for (int i=0; i < length; i++) {
-        if (str[i] != 'P')
-            continue;
-        for (int j=i+1; j < length; j++) {
-            if (str[j] != 'T')
-                continue;
-            for (int k=i+1; k < j; k++) {
-                if (str[k] == 'A')
-                    total++;
-            }
-        }
+        if (str[i] == 'P')
+            num_p++;
+        else if (str[i] == 'A')
+            num_pa += num_p;
+        else total += num_pa;
     }
-    printf("%d\n", total % 1000000007);
+
+    printf("%ld\n", total % 1000000007);
 
     return 0;
 }

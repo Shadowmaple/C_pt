@@ -6,9 +6,12 @@ int main()
     char have[1001], want[1001];
     scanf("%s%s", have, want);
     int len_have = strlen(have), len_want = strlen(want);
-    int isHave[len];
+    int isHave[len_have];
     int get = 0;
-    memset(isHave, 1, sizeof(int));
+
+    //初始化isHave
+    for (int i=0; i < len_have; i++)
+        isHave[i] = 1;
 
     for (int i=0; i < len_want; i++) {
         for (int j=0; j < len_have; j++) {

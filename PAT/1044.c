@@ -10,7 +10,6 @@ int main()
 
     scanf("%d\n", &N);
     char num[8];
-    char num_return[N][8];
 
     for (int i=0; i < N; i++) {
         // scanf("%[^\n]", num);
@@ -29,32 +28,28 @@ int main()
             for (int j=0; num[j] != '\0'; j++) {
                 n = n * 10 + (num[j] - '0');
             }
-            //转换为13进制,并输出
-            int x = n / 13;
-            int y = n % 13;
-            if (x) {
-                strcpy(num_return[i], mars_high[x-1]);
-                num_return[i][3] = ' ';
-                num_return[i][4] = '\0';
-            } else  {
-                num_return[i][0] = '\0';
-            }
-            strcat(num_return[i], y? mars[y-1] : "tret");
+            if (!n)
+                puts("tret");
+            else if (n <= 12)
+                printf("%s\n", mars[n - 1]);
+            else if (n <= 24)
+                printf("%s\n", mars_high[n-13]);
+            else 
+                printf("%s %s\n", mars_high[n / 13 - 1], mars[n % 13 - 1]);
+
         } else {
             if (num[3] == '\0') {
-                if (!strcmp(num_return[i], "tret")) {
-                    strcpy(num_return[i], "0");
+                if (!strcmp(num, "tret")) {
+                    printf("%d\n", 0);
                     continue;
                 }
                 for (int j=0; j < 12; j++) {
                     if (!strcmp(num, mars[j])) {
-                        char a[][3] = {"1", "2", "3", "4","5","6","7","8","9","10","11","12"};
-                        strcpy(num_return[i], a[j]);
+                        printf("%d\n", j + 1);
                         break;
                     }
                     if (!strcmp(num, mars_high[j])) {
-                        char a[][3] = {"13", "14", "15", "16","17","18","19","20","21","22","23","24"};
-                        strcpy(num_return[i], a[j]);
+                        printf("%d\n", j + 13);
                         break;
                     }
                 }
@@ -75,22 +70,10 @@ int main()
                         }
                     }
                 }
-                //十进制数字转换为字符串
-                int j=0;
-                if (n >= 100) {
-                    num_return[i][j++] = n / 100 + '0';
-                    n %= 100;
-                }
-                if (n >= 10) {
-                    num_return[i][j++] = n / 10 + '0';
-                    n %= 10;
-                }
-                num_return[i][j++] = n + '0';
-                num_return[i][j] = '\0';
+                printf("%d\n", n);
             }
         }
     }
-    for (int i=0; i < N; i++)
-        printf("%s\n", num_return[i]);
+
     return 0;
 }

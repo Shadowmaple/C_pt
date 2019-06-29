@@ -18,12 +18,42 @@ int main()
 
     for (int i=0; i < n; i++) {
         int element = num[i];
-        int cmp_l = (element > num[i-1]) ? 1:-1;
-        int cmp_r = -cmp_l;
-        int flag = 0;
-        for (int j=0; j < i; j++) {
-            if (element - num[j] >= cmp_l)
+        int cmp_l = (element > num[i-1]);
+        int cmp_r = !cmp_l;
+        int flag = 1;
+        if (cmp_l) {
+            for (int j=0; j < i; j++) {
+                if (element > num[j])
+                    continue;
+                flag = 0;
+                break;
+            }
+        } else {
+            for (int j=0; j < i; j++) {
+                if (element < num[j])
+                    continue;
+                flag = 0;
+                break;
+            }
+        }
+        if (flag && cmp_r) {
+            for (int j=i; j < n; j++) {
+                if (element > num[j])
+                    continue;
+                flag = 0;
+                break;
+            }
+        } else if (flag && !cmp_r) {
+            for (int j=i; j < n; j++) {
+                if (element < num[j])
+                    continue;
+                flag = 0;
+                break;
+            }
+        }
 
+        if (flag) {
+            pivot[sum++] = element;
         }
     }
 

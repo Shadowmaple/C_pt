@@ -14,10 +14,12 @@ int main()
     if (len_a < len_b) {
         char x[len_b - len_a];
         memset(x, '0', len_b - len_a);
+        x[len_b - len_a] = '\0';
         strcpy(a, strcat(x, a));
     } else if (len_a > len_b) {
-        char x[len_a - len_b];
+        char x[len_a - len_b + 1];
         memset(x, '0', len_a - len_b);
+        x[len_a - len_b] = '\0';
         strcpy(b, strcat(x, b));
     }
 

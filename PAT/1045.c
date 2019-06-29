@@ -6,6 +6,18 @@ int compar(const void *a, const void *b)
     return *(int *) a - *(int *) b;
 }
 
+void copy(int *x, int *num, int i, int j)
+{
+    for (int k=i, m=0; k <= j; k++)
+        x[m++] = num[k];
+}
+
+void pr(int *x, int n)
+{
+    for (int i=0; i <= n; i++)
+        printf("%d ", x[i]);
+    putchar('\n');
+}
 int main()
 {
 	int n;
@@ -28,34 +40,30 @@ int main()
         }
         int flag = 1;
         if (cmp_l) {
-            for (int j=0; j < i; j++) {
-                if (element > num[j])
-                    continue;
+            int x[i+1];
+            copy(x, num, 0, i);
+            qsort(x, i+1, sizeof(int), compar);
+            if (x[i] != element)
                 flag = 0;
-                break;
-            }
         } else {
-            for (int j=0; j < i; j++) {
-                if (element < num[j])
-                    continue;
+            int x[i+1];
+            copy(x, num, 0, i);
+            qsort(x, i+1, sizeof(int), compar);
+            if (x[0] != element)
                 flag = 0;
-                break;
-            }
         }
         if (flag && cmp_r) {
-            for (int j=i; j < n; j++) {
-                if (element > num[j])
-                    continue;
+            int x[i+1];
+            copy(x, num, i, n-1);
+            qsort(x, n-i, sizeof(int), compar);
+            if (x[n-i-1] != element)
                 flag = 0;
-                break;
-            }
         } else if (flag && !cmp_r) {
-            for (int j=i+1; j < n; j++) {
-                if (element < num[j])
-                    continue;
+            int x[i+1];
+            copy(x, num, i, n-1);
+            qsort(x, n-i, sizeof(int), compar);
+            if (x[0] != element)
                 flag = 0;
-                break;
-            }
         }
 
         if (flag) {

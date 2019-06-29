@@ -1,3 +1,5 @@
+// 有点难度，自己的两种做法都超时，PTA上通过率为0.18
+
 # include <stdio.h>
 
 int main()

@@ -3,7 +3,7 @@
 
 int compar(const void *a, const void *b)
 {
-    return *(int *) a - *(int *) b < 0;
+    return *(int *) a - *(int *) b;
 }
 
 int main()
@@ -18,8 +18,14 @@ int main()
 
     for (int i=0; i < n; i++) {
         int element = num[i];
-        int cmp_l = (element > num[i-1]);
-        int cmp_r = !cmp_l;
+        int cmp_l, cmp_r;
+        if (!i) {
+            cmp_r = element > num[i+1];
+            cmp_l = !cmp_r;
+        } else {
+            cmp_l = (element > num[i-1]);
+            cmp_r = !cmp_l;
+        }
         int flag = 1;
         if (cmp_l) {
             for (int j=0; j < i; j++) {
@@ -44,7 +50,7 @@ int main()
                 break;
             }
         } else if (flag && !cmp_r) {
-            for (int j=i; j < n; j++) {
+            for (int j=i+1; j < n; j++) {
                 if (element < num[j])
                     continue;
                 flag = 0;

@@ -17,8 +17,8 @@ int main()
 		scanf("%d-%d %d", &id_buffer, &buffer, &grade_buffer);
 		int j;
 		for (j=0; j < k; j++) {
-			if (id[k] == id_buffer) {
-				grade[k] += grade_buffer;
+			if (id[j] == id_buffer) {
+				grade[j] += grade_buffer;
 				break;
 			}
 		}
@@ -26,7 +26,6 @@ int main()
 			id[k] = id_buffer;
 			grade[k] = grade_buffer;
 			k++;
-			break;
 		}
 	}
 	int max_id = 0, max = 0;
@@ -37,6 +36,5 @@ int main()
 		}
 
 	printf("%d %d\n", max_id, max);
-
 	return 0;
 }

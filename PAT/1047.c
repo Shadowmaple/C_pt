@@ -18,9 +18,21 @@ int main()
 			if (id[k] == id_buffer) {
 				grade[k] += grade_buffer;
 				break;
+			} else if (!id[k]) {
+				id[++k] = id_buffer;
+				grade[k] = grade_buffer;
+				break;
 			}
 		}
 	}
+	int max_id, max = 0;
+	for (int i=0; i < k; i++)
+		if (grade[i] > max) {
+			max = grade[i];
+			max_id = id[i];
+		}
+
+	printf("%d %d\n", max_id, max);
 
 	return 0;
 }

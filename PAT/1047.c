@@ -1,12 +1,13 @@
 # include <stdio.h>
-# include <string.h>
 
 int main()
 {
 	int n;
+	scanf("%d", &n);
+
 	int id[n], grade[n];
 	int k = 0;
-
+	
 	for (int i=0; i < n; i++) {
 		grade[i] = 0;	
 		id[i] = 0;
@@ -14,18 +15,21 @@ int main()
 	for (int i=0; i < n; i++) {
 		int id_buffer, grade_buffer, buffer;
 		scanf("%d-%d %d", &id_buffer, &buffer, &grade_buffer);
-		for (int j=0; j < k; j++) {
+		int j;
+		for (j=0; j < k; j++) {
 			if (id[k] == id_buffer) {
 				grade[k] += grade_buffer;
 				break;
-			} else if (!id[k]) {
-				id[++k] = id_buffer;
-				grade[k] = grade_buffer;
-				break;
 			}
 		}
+		if (j >= k) {
+			id[k] = id_buffer;
+			grade[k] = grade_buffer;
+			k++;
+			break;
+		}
 	}
-	int max_id, max = 0;
+	int max_id = 0, max = 0;
 	for (int i=0; i < k; i++)
 		if (grade[i] > max) {
 			max = grade[i];

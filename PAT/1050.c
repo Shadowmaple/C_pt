@@ -34,33 +34,40 @@ int main()
 
     int k , a, b;
     int i = 0;
-    k = a = b = 0;
+    k = a = 0;
+    b = -1;
+    int x = 1;
     while (1) {
-        while (b < n - i && !ret[a][b])
+        b++;
+        while (b < n - i)
             ret[a][b++] = num[k++];
-        if (b <= n - i && ret[a][b])
+        if (b == n - i && ret[a+1][b-1])
             break;
         b--;
 
-        while (a < m - i && !ret[a][b])
+        a++;
+        while (a < m - i)
             ret[a++][b] = num[k++];
-        if (a <= m - i && ret[a][b])
+        if (a == m - i && ret[a-1][b-1])
             break;
         a--;
 
-        while (b >= i && !ret[a][b])
+        b--;
+        while (b >= i)
             ret[a][b--] = num[k++];
-        if (b >= i - 1 && ret[a][b])
+        if (b < i && ret[a-1][b+1])
             break;
         b++;
 
         i++;
-        while (a >= i && !ret[a][b])
+        a--;
+        while (a >= i)
             ret[a--][b] = num[k++];
-        if (a >= i - 1 && ret[a][b])
+        if (a < i  && ret[a+1][b+1])
             break;
         a++;
     }
+
     for (int i=0; i < m; i++)
         for (int j=0; j < n; j++)
             printf("%d%c", ret[i][j], j == n-1 ? '\n' : ' ');

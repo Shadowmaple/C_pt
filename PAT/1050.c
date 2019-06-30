@@ -1,6 +1,5 @@
 # include <stdio.h>
 # include <stdlib.h>
-# include <math.h>
 
 int compar(const void *a, const void *b)
 {
@@ -17,15 +16,11 @@ int main()
     
     qsort(num, N, sizeof(int), compar);
 
-    int m, n, min = N;
-    for (int b = sqrt(N), a = N / b; a >= b; b++, a--) {
-        if (a * b != N) continue;
-        if (min > a - b) {
-            min = a - b;
-            m = a;
-            n = b;
-        }
-    }
+    // m 和 n 值的确定是关键点，之前用开方形式确定，结果有三个测试点通不过，开方有些情况满足不了
+    int m, n;
+    for (m = 1; m * m < N || N % m; m++) ;
+    n = N / m;
+
     int ret[m][n];
 
     for (int i = 0; i < m; i++)

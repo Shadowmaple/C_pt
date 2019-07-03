@@ -14,74 +14,29 @@ int main()
             if (c == '\n') break;
             if (c == '[') {
                 scanf("%[^]]", emoj[i][count[i]++]);
+                // 格式化字符串"%[^...]"
             }
         }
     }
-
-/*  
-    // 不知道为什么这样只读到乱码
-    for (int i=0; i < 3; i++) {
-        int flag = 0;
-        int k = 0;
-        while (1) {
-            char c;
-            scanf("%c", &c);
-            if (c == '\n') break;
-            if (c == '[') {
-                flag = 1;
-            } else if (c == ']') {
-                flag = 0;
-                emoj[i][count[i]][k] = '\0';
-                count[i]++;
-            } else if (flag) {
-                emoj[i][count[i]][k++] = c;
-            }
-        }
-        count[i]--;
-    }
-    */
 
     int K;
-    int choice;
+    int choice[5];
     scanf("%d", &K);
 
     for (int i=0; i < K; i++) {
-        char expe[50];
-        expe[0] = '\0';
-        int j;
-        for (j=0; j < 5; j++) {
-            
-            scanf("%d", &choice);
-            if (choice < 0) {
-                puts("Are you kidding me? @\\/@");
-                break;
-            }
+        for (int j=0; j < 5; j++)
+            scanf("%d", &choice[j]);
 
-            if (!j || j == 4) {
-                if (choice > count[0]) {
-                    puts("Are you kidding me? @\\/@");
-                    break;
-                }
-                strcat(expe, emoj[0][choice - 1]);
-                if (!j) strcat(expe, "(");
-            } else if (j == 2) {
-                if (choice > count[2]) {
-                    puts("Are you kidding me? @\\/@");
-                    break;
-                }
-                strcat(expe, emoj[2][choice - 1]);
-            } else {
-                if (choice > count[1]) {
-                    puts("Are you kidding me? @\\/@");
-                    break;
-                }
-                strcat(expe, emoj[1][choice - 1]);
-                if (j == 3) strcat(expe, ")");
-            }
-            
-        }
-        if (j == 5)
-            printf("%s\n", expe);
+        if (choice[0] > 0 && choice[0] <= count[0] &&
+            choice[1] > 0 && choice[1] <= count[1] &&
+            choice[2] > 0 && choice[2] <= count[2] &&
+            choice[3] > 0 && choice[3] <= count[1] &&
+            choice[4] > 0 && choice[4] <= count[0])
+        {
+            printf("%s(%s%s%s)%s\n", emoj[0][choice[0]-1], emoj[1][choice[1]-1],
+                emoj[2][choice[2]-1], emoj[1][choice[3]-1], emoj[0][choice[4]-1]);
+        } else
+            puts("Are you kidding me? @\\/@");
     }
 
     return 0;

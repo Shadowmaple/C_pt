@@ -5,7 +5,6 @@ int main()
 {
     char emoj[3][10][5] = {0};
     int count[3] = {0};
-    int K;
 
     // 表情符号的输入是关键点
     for (int i=0; i < 3; i++) {
@@ -42,12 +41,41 @@ int main()
     }
     */
 
-    for (int i=0; i < 3; i++) {
-        for (int j=0; j < count[i]; j++)
-            printf("%s ", emoj[i][j]);
-        putchar('\n');
-    }
+    int K;
+    int choice;
+    scanf("%d", &K);
 
+    for (int i=0; i < K; i++) {
+        char expe[50];
+        expe[0] = '\0';
+        int j;
+        for (j=0; j < 5; j++) {
+            scanf("%d", &choice);
+
+            if (!j || j == 4) {
+                if (choice > count[0]) {
+                    puts("Are you kidding me? @\\/@");
+                }
+                strcat(expe, emoj[0][choice - 1]);
+                if (!j) strcat(expe, "(");
+            } else if (j == 2) {
+                if (choice > count[2]) {
+                    puts("Are you kidding me? @\\/@");
+                    break;
+                }
+                strcat(expe, emoj[2][choice - 1]);
+            } else {
+                if (choice > count[1]) {
+                    puts("Are you kidding me? @\\/@");
+                    break;
+                }
+                strcat(expe, emoj[1][choice - 1]);
+                if (j == 3) strcat(expe, ")");
+            }
+        }
+        if (j == 5)
+            printf("%s\n", expe);
+    }
 
     return 0;
 }

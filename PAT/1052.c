@@ -50,11 +50,17 @@ int main()
         expe[0] = '\0';
         int j;
         for (j=0; j < 5; j++) {
+            
             scanf("%d", &choice);
+            if (choice < 0) {
+                puts("Are you kidding me? @\\/@");
+                break;
+            }
 
             if (!j || j == 4) {
                 if (choice > count[0]) {
                     puts("Are you kidding me? @\\/@");
+                    break;
                 }
                 strcat(expe, emoj[0][choice - 1]);
                 if (!j) strcat(expe, "(");
@@ -72,6 +78,7 @@ int main()
                 strcat(expe, emoj[1][choice - 1]);
                 if (j == 3) strcat(expe, ")");
             }
+            
         }
         if (j == 5)
             printf("%s\n", expe);

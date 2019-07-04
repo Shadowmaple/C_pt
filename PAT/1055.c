@@ -38,8 +38,10 @@ int main()
     int index = 0;
 
     for (int i = 0; i < K; i++) {
+        // 该排人数
         int num = !i ? line_max : line;
         char name[num][9];
+        // 中间位置
         int cen = num / 2 + 1;
         int left = cen - 2, right = cen;
         

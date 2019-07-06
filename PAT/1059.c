@@ -1,6 +1,5 @@
 # include <stdio.h>
 # include <string.h>
-# include <math.h>
 # include <stdlib.h>
 
 typedef struct
@@ -13,7 +12,8 @@ typedef struct
 int isPrime(int num)
 {
     int flag = 1;
-    for (int i = 2; i < sqrt(num); i++)
+    // 用 i < sqrt(num) 会有一个测试点通不过
+    for (int i = 2; i * i <= num; i++)
         if (num % i == 0) {
             flag = 0;
             break;

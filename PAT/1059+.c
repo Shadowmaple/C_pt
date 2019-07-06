@@ -2,6 +2,7 @@
 
 int isPrime(int num)
 {
+    // 用 i < sqrt(num) 会有一个测试点通不过
     for (int i = 2; i * i <= num; i++)
         if (num % i == 0)
             return 0;

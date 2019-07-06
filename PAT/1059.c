@@ -16,11 +16,6 @@ int isPrime(int num)
     else return 0;
 }
 
-int compar(const void *a, const void *b)
-{
-
-}
-
 int search(char *target, char (*id)[5], int left, int right)
 {
     int cen = (right + left) / 2;
@@ -46,7 +41,6 @@ int main()
     scanf("%d", &K);
 
     char check[K][5];
-    qsort()
     for (int i=0; i < K; i++) {
         scanf("%s", check[i]);
         int x = search(check[i], id, 0, N);

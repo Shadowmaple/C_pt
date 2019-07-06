@@ -3,6 +3,13 @@
 # include <math.h>
 # include <stdlib.h>
 
+typedef struct
+{
+    int num;
+    int flag;
+    char id[5];
+} stu;
+
 int isPrime(int num)
 {
     int flag = 1;
@@ -16,48 +23,58 @@ int isPrime(int num)
     else return 0;
 }
 
-int search(char *target, char (*id)[5], int left, int right)
+int compar(const void *a, const void *b)
+{
+    stu x = *(stu *) a, y = *(stu *) b;
+    return strcmp(x.id, y.id);
+}
+
+// 对分查找，有序是前提
+int search(char *target, stu *competitor, int left, int right)
 {
     int cen = (right + left) / 2;
-    if (!strcmp(target, id[cen])) return cen;
+    if (!strcmp(target, competitor[cen].id)) return competitor[cen].num;
     else if (left > right) return -1;
-    int x = search(target, id, left, cen - 1);
-    int y = search(target, id, cen + 1, right);
-    if (x != -1) return x;
-    if (y != -1) return y;
+    else if (strcmp(target, competitor[cen].id) > 0) {
+        return search(target, competitor, cen + 1, right);
+    } else {
+        return search(target, competitor, left, cen - 1);
+    }
+
 }
 
 int main()
 {
     int N, K;
     scanf("%d", &N);
-    char id[N][5];
-    int flag[N];
+    stu competitor[N];
     for (int i=0; i < N; i++) {
-        flag[i] = 0;
-        scanf("%s", id[i]);
+        competitor[i].flag = 0;
+        competitor[i].num = i;
+        scanf("%s", competitor[i].id);
     }
+    qsort(competitor, N, sizeof(stu), compar);
 
     scanf("%d", &K);
 
     char check[K][5];
     for (int i=0; i < K; i++) {
         scanf("%s", check[i]);
-        int x = search(check[i], id, 0, N);
+        int x = search(check[i], competitor, 0, N);
 
         if (x == -1) printf("%s: Are you kidding?\n", check[i]);
-        else if (flag[x]) {
+        else if (competitor[x].flag) {
             printf("%s: Checked\n", check[i]);
-            flag[x] = 1;
+            competitor[x].flag = 1;
         } else if (!x) {
             printf("%s: Mystery Award\n", check[i]);
-            flag[x] = 1;
+            competitor[x].flag = 1;
         } else if (isPrime(x + 1)) {
             printf("%s: Minion\n", check[i]);
-            flag[x] = 1;
+            competitor[x].flag = 1;
         } else {
             printf("%s: Chocolate\n", check[i]);
-            flag[x] = 1;
+            competitor[x].flag = 1;
         }
     }
 

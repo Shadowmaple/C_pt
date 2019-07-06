@@ -16,10 +16,9 @@ int main()
     
     qsort(s, n, sizeof(int), compar);
 
-    int count = 0, e = n > s[0] ? s[0] : n;
-    for (int i = 0; i < n && i < e; i++) {
-        if (s[i] <= e) e--;
-    }
+    int e = 0;
+    for (int i = 0; i < n && s[i] > e + 1; i++)
+        if (s[i] > e) e++;
 
     printf("%d\n", e);
     

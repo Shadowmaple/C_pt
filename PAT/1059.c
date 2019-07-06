@@ -5,8 +5,8 @@
 
 typedef struct
 {
-    int num;
-    int flag;
+    int num;    // 排名，0开始
+    int flag;   // 奖品是否已取
     char id[5];
 } stu;
 
@@ -30,17 +30,18 @@ int compar(const void *a, const void *b)
 }
 
 // 对分查找，有序是前提
-int search(char *target, stu *competitor, int left, int right)
+int search(char *target, stu *competitor, int left, int right, int *no)
 {
     int cen = (right + left) / 2;
-    if (!strcmp(target, competitor[cen].id)) return competitor[cen].num;
-    else if (left > right) return -1;
+    if (!strcmp(target, competitor[cen].id)) {
+        *no = cen;
+        return competitor[cen].num;
+    } else if (left > right) return -1;
     else if (strcmp(target, competitor[cen].id) > 0) {
-        return search(target, competitor, cen + 1, right);
+        return search(target, competitor, cen + 1, right, no);
     } else {
-        return search(target, competitor, left, cen - 1);
+        return search(target, competitor, left, cen - 1, no);
     }
-
 }
 
 int main()
@@ -57,24 +58,25 @@ int main()
 
     scanf("%d", &K);
 
-    char check[K][5];
+    char check[5];
     for (int i=0; i < K; i++) {
-        scanf("%s", check[i]);
-        int x = search(check[i], competitor, 0, N);
+        scanf("%s", check);
+        int rank, no;
+        rank = search(check, competitor, 0, N, &no);
 
-        if (x == -1) printf("%s: Are you kidding?\n", check[i]);
-        else if (competitor[x].flag) {
-            printf("%s: Checked\n", check[i]);
-            competitor[x].flag = 1;
-        } else if (!x) {
-            printf("%s: Mystery Award\n", check[i]);
-            competitor[x].flag = 1;
-        } else if (isPrime(x + 1)) {
-            printf("%s: Minion\n", check[i]);
-            competitor[x].flag = 1;
+        if (rank == -1) printf("%s: Are you kidding?\n", check);
+        else if (competitor[no].flag) {
+            printf("%s: Checked\n", check);
+            competitor[no].flag = 1;
+        } else if (!rank) {
+            printf("%s: Mystery Award\n", check); 
+            competitor[no].flag = 1;
+        } else if (isPrime(rank + 1)) {
+            printf("%s: Minion\n", check);
+            competitor[no].flag = 1;
         } else {
-            printf("%s: Chocolate\n", check[i]);
-            competitor[x].flag = 1;
+            printf("%s: Chocolate\n", check);
+            competitor[no].flag = 1;
         }
     }
 

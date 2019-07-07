@@ -1,5 +1,4 @@
 # include <stdio.h>
-# include <stdlib.h>
 
 int main()
 {
@@ -12,7 +11,7 @@ int main()
     while ((double) i / K <= a)
         i++;
 
-    for (; i < K - 2 && (double) i / K < b; i++) {
+    for (; (double) i / K < b; i++) {
         int x = i, y = K;
         while (y % x) {
             int c = y % x;

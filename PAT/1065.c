@@ -10,7 +10,7 @@ int main()
 {
     int N, M;
     scanf("%d", &N);
-    int pep[100000] = {0}, couple[100000] = {0};
+    int pep[100000] = {0};
 
     struct
     { 
@@ -18,9 +18,7 @@ int main()
         int flag;
     } man[N * 2];
 
-    int index = 0;
-
-    for (int i = 0; i < N; i++) {
+    for (int i = 0, index = 0; i < N; i++) {
         int a, b;
         scanf("%d%d", &a, &b);
         pep[a] = index + 1;
@@ -37,25 +35,25 @@ int main()
     for (int i = 0; i < M; i++) {
         int guest;
         scanf("%d", &guest);
-        if (!pep[guest]) {
+
+        if (!pep[guest])
             single[count++] = guest;
-            continue;
-        }
-        man[pep[guest] - 1].flag = 1;
+        else
+            man[pep[guest] - 1].flag = 1;
     }
 
-    for (int i = 0; i < N * 2; i += 2) {
+    for (int i = 0; i < N * 2; i += 2)
         if (!man[i].flag && man[i + 1].flag)
             single[count++] = man[i + 1].num;
         else if (man[i].flag && !man[i + 1].flag)
             single[count++] = man[i].num;
-    }
 
     qsort(single, count, sizeof(int), compar);
 
     printf("%d\n", count);
     for (int i = 0; i < count; i++)
-        printf("%d%c", single[i], i == count-1 ? '\n': ' ');
+        // 注意是ID，所以输出为%05d 
+        printf("%05d%c", single[i], i == count-1 ? '\n': ' ');
 
     return 0;
 }

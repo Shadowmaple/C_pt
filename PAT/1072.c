@@ -22,9 +22,9 @@ int main()
             scanf("%d", &obj);
             if (confiscate[obj]) {
                 if (!num)
-                    printf("%s: %d", name, obj);
+                    printf("%s: %04d", name, obj);
                 else
-                    printf(" %d", obj);
+                    printf(" %04d", obj);
                 num++;
                 flag = 1;
             }

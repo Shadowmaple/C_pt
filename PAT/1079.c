@@ -25,16 +25,16 @@ void reserve(char *a, char *b)
 
 void sum(char *n)
 {
-    char rev[1001], num[1001];
+    char rev[10001], num[10001];
     reserve(n, rev);
-    int i, index = 999, flag = 0;
+    int i, index = 9999, flag = 0;
     for (i = strlen(n) - 1; i >= 0; i--, index--) {
         int x = n[i] - '0' + (rev[i] - '0') + flag;
         num[index] = x % 10 + '0';
         flag = x / 10;
     }
     if (flag) num[index--] = flag + '0';
-    num[1000] = '\0';
+    num[10000] = '\0';
     strcpy(num, num + index + 1);
 
     printf("%s + %s = %s\n", n, rev, num);
@@ -43,7 +43,8 @@ void sum(char *n)
 
 int main()
 {
-    char n[1001], num[1001];
+    // 数组不能只是1001位，太小，测评时会报运行时错误
+    char n[10001];
     scanf("%s", n);
 
     if (check(n))

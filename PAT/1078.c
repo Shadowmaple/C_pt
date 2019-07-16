@@ -20,7 +20,7 @@ void putcount(char *str, int count, int *index)
 
 int main()
 {
-    char n, str[1001];
+    char n, str[100000];
     scanf("%c", &n);
     getchar();
 

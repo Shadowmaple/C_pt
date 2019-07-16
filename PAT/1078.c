@@ -20,6 +20,8 @@ void putcount(char *str, int count, int *index)
 
 int main()
 {
+    // 定义一个数组来存储，最后输出，这种方式只是方便测试，不推荐使用
+    // 就像这题，定义的数组小了，解压时就会发生段错误
     char n, str[100000];
     scanf("%c", &n);
     getchar();
@@ -39,9 +41,9 @@ int main()
                 index++;
                 continue;
             }
-            if (now == pre) {
+            if (now == pre)
                 count++;
-            } else if (!count) {
+            else if (!count) {
                 str[index++] = pre;
                 pre = now;
             } else {
@@ -65,9 +67,8 @@ int main()
                 while (count-- > 0)
                     str[index++] = now;
                 count = 0;
-            } else {
+            } else
                 str[index++] = now;
-            }
         }
     }
     str[index] = '\0';

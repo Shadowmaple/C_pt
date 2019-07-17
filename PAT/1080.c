@@ -23,50 +23,35 @@ int main()
 {
     int P, M, N;
     scanf("%d%d%d", &P, &M, &N);
-    student stu[P + M + N];
-    int count = 0;
+    student stu[10000] = {0};
+    int count = 0, mark;
+    char name[21];
 
-    for (int i = 0; i < P + M + N; i++) {
-        stu[i].codeScore = -1;
-        stu[i].finalScore = -1;
-        stu[i].midtermScore = -1;
-    }
-
-    for (int i = 0; i < P; i++, count++) {
-        scanf("%s %d", stu[count].name, &stu[count].codeScore);
+    for (int i = 0; i < P; i++) {
+        scanf("%s %d", name, &mark);
+        if (mark < 200) continue;
+        strcpy(stu[count].name, name);
+        stu[count].codeScore = mark;
+        stu[count].midtermScore = -1;
+        stu[count].finalScore = -1;
+        count++;
     }
     for (int i = 0; i < M; i++) {
-        char x[21];
-        int y, j, flag = 0;
-        scanf("%s %d", x, &y);
-        for (j = 0; j < count; j++) {
-            if (!strcmp(x, stu[j].name)) {
-                flag = 1;
+        scanf("%s %d", name, &mark);
+        for (int j = 0; j < count; j++) {
+            if (!strcmp(name, stu[j].name)) {
+                stu[j].midtermScore = mark;
                 break;
             }
-        }
-        if (flag) {
-            stu[j].midtermScore = y;
-        } else {
-            stu[count].midtermScore = y;
-            strcpy(stu[count++].name, x);
         }
     }
     for (int i = 0; i < N; i++) {
-        char x[21];
-        int y, j, flag = 0;
-        scanf("%s %d", x, &y);
-        for (j = 0; j < count; j++) {
-            if (!strcmp(x, stu[j].name)) {
-                flag = 1;
+        scanf("%s %d", name, &mark);
+        for (int j = 0; j < count; j++) {
+            if (!strcmp(name, stu[j].name)) {
+                stu[j].finalScore = mark;
                 break;
             }
-        }
-        if (flag) {
-            stu[j].finalScore = y;
-        } else {
-            stu[count].finalScore = y;
-            strcpy(stu[count++].name, x);
         }
     }
     for (int i = 0; i < count; i++) {
@@ -76,7 +61,6 @@ int main()
     qsort(stu, count, sizeof(student), compar);
     for (int i = 0; i < count; i++) {
         if (stu[i].grade < 60) break;
-        if (stu[i].codeScore < 200) continue;
         printf("%s %d %d %d %d\n", stu[i].name, stu[i].codeScore, 
                     stu[i].midtermScore, stu[i].finalScore, stu[i].grade);
     }

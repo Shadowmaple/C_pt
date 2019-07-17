@@ -19,6 +19,19 @@ int compar(const void *a, const void *b)
     else return 1;
 }
 
+int cmpName(const void *a, const void *b)
+{
+    student x = *(student *) a, y = *(student *) b;
+    return strcmp(x.name, y.name);
+}
+
+int cmpSearch(const void *a, const void *b)
+{
+    char *x = (char *) a;
+    student *y = (student *) b;
+    return strcmp(x, y->name);
+}
+
 int main()
 {
     int P, M, N;
@@ -36,29 +49,27 @@ int main()
         stu[count].finalScore = -1;
         count++;
     }
+    qsort(stu, count, sizeof(student), cmpName);
+
+    void *result;
     for (int i = 0; i < M; i++) {
         scanf("%s %d", name, &mark);
-        for (int j = 0; j < count; j++) {
-            if (!strcmp(name, stu[j].name)) {
-                stu[j].midtermScore = mark;
-                break;
-            }
-        }
+        result = bsearch(name, stu, count, sizeof(student), cmpSearch);
+        if (result != NULL)
+            (*(student *) result).midtermScore = mark;
     }
     for (int i = 0; i < N; i++) {
         scanf("%s %d", name, &mark);
-        for (int j = 0; j < count; j++) {
-            if (!strcmp(name, stu[j].name)) {
-                stu[j].finalScore = mark;
-                break;
-            }
-        }
+        result = bsearch(name, stu, count, sizeof(student), cmpSearch);
+        if (result != NULL)
+            (*(student *) result).finalScore = mark;
     }
     for (int i = 0; i < count; i++) {
         stu[i].grade = stu[i].midtermScore <= stu[i].finalScore ? stu[i].finalScore : \
                         stu[i].midtermScore * 0.4 + stu[i].finalScore * 0.6 + 0.5;
     }
     qsort(stu, count, sizeof(student), compar);
+    
     for (int i = 0; i < count; i++) {
         if (stu[i].grade < 60) break;
         printf("%s %d %d %d %d\n", stu[i].name, stu[i].codeScore, 

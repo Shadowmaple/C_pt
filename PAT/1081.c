@@ -26,13 +26,14 @@ int main()
             if (isalpha(psw[j])) haveAlpha = 1;
         }
         if (flag) continue;
-        
-        if (haveAlpha && haveDigit)
-            puts("Your password is wan mei.");
-        else if (haveAlpha)
+
+        if (haveAlpha && !haveDigit)
             puts("Your password needs shu zi.");
-        else
+        else if (!haveAlpha && haveDigit)
             puts("Your password needs zi mu.");
+        else
+            puts("Your password is wan mei.");
+            
     }
     return 0;
 }

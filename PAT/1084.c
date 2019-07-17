@@ -6,15 +6,13 @@ int main()
     int d, n;
     scanf("%d %d", &d, &n);
 
-    char result[1000];
+    char result[100000], str[100000];
     result[0] = d + '0';
-    result[1] = '1';
-    result[2] = '\0';
+    result[1] = '\0';
   
-    for (int j = 2; j < n; j++) {
+    for (int j = 1; j < n; j++) {
         int count = 1;
         char pre = result[0];
-        char str[1000];
         int index = 0;
         int i = 1;
         do {

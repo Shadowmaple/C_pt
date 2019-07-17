@@ -61,12 +61,12 @@ int main()
     for (int i = 0; i < N; i++) {
         scanf("%s %d", name, &mark);
         result = bsearch(name, stu, count, sizeof(student), cmpSearch);
-        if (result != NULL)
-            (*(student *) result).finalScore = mark;
-    }
-    for (int i = 0; i < count; i++) {
-        stu[i].grade = stu[i].midtermScore <= stu[i].finalScore ? stu[i].finalScore : \
-                        stu[i].midtermScore * 0.4 + stu[i].finalScore * 0.6 + 0.5;
+        if (result != NULL) {
+            student *s = (student *) result;
+            s->finalScore = mark;
+            s->grade = s->midtermScore <= s->finalScore ? s->finalScore : \
+                        s->midtermScore * 0.4 + s->finalScore * 0.6 + 0.5;
+        }
     }
     qsort(stu, count, sizeof(student), compar);
     

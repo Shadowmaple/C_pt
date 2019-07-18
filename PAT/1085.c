@@ -12,7 +12,7 @@ typedef struct
 typedef struct
 {
     char id[7], school[7];
-    int score;
+    float score;
 } student;
 
 int compar(const void *a, const void *b)
@@ -42,37 +42,34 @@ int main()
     scanf("%d", &n);
     apartment unit[100000] = {0};
     student stu[n];
-    int count = -1;
+    int count = 0;
 
     for (int i = 0; i < n; i++) {
-        scanf("%s %d %s", stu[i].id, &stu[i].score, stu[i].school);
+        scanf("%s %f %s", stu[i].id, &stu[i].score, stu[i].school);
         convert(stu[i].school);
-        if (stu[i].id[0] == 'B') stu[i].score /= 1.5;
-        else if (stu[i].id[0] == 'T') stu[i].score *= 1.5;
+        if (stu[i].id[0] == 'B')        stu[i].score /= 1.5;
+        else if (stu[i].id[0] == 'T')   stu[i].score *= 1.5;
     }
     qsort(stu, n, sizeof(student), cmpName);
 
+    float score = 0;
+    int num = 0;
     for (int i = 0; i < n; i++) {
-        if (!i || strcmp(stu[i].school, stu[i - 1].school)) {
-            count++;
+        score += stu[i].score;
+        num++;
+        if (i == n - 1 || strcmp(stu[i].school, stu[i + 1].school)) {
             strcpy(unit[count].name, stu[i].school);
-            unit[count].num = 1;
-            unit[count].score = stu[i].score;
-        } else {
-            unit[count].num++;
-            unit[count].score += stu[i].score;
+            unit[count].score = score;
+            unit[count++].num = num;
+            num = 0;
+            score = 0;
         }
     }
-    count++;
     qsort(unit, count, sizeof(apartment), compar);
 
     printf("%d\n", count);
     for (int i = 0, rank = 1; i < count; i++) {
-        if (!i) {
-            printf("%d %s %d %d\n", rank, unit[i].name, unit[i].score, unit[i].num);
-            continue;
-        }
-        if (unit[i].score == unit[i-1].score)
+        if (!i || unit[i].score == unit[i-1].score)
             printf("%d %s %d %d\n", rank, unit[i].name, unit[i].score, unit[i].num);
         else
             printf("%d %s %d %d\n", rank = i + 1, unit[i].name, unit[i].score, unit[i].num);

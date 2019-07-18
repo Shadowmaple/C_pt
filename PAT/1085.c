@@ -40,7 +40,7 @@ int main()
 {
     int n;
     scanf("%d", &n);
-    apartment unit[10000] = {0};
+    apartment unit[100000] = {0};
     student stu[n];
     int count = -1;
 

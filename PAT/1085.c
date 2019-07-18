@@ -42,12 +42,10 @@ int main()
     scanf("%d", &n);
     apartment unit[10000] = {0};
     student stu[n];
-    int count = 0;
-    char id[7], school[7];
-    int score;
+    int count = -1;
 
     for (int i = 0; i < n; i++) {
-        scanf("%s %d %s", stu[i].id, stu[i].score, stu[i].school);
+        scanf("%s %d %s", stu[i].id, &stu[i].score, stu[i].school);
         convert(stu[i].school);
         if (stu[i].id[0] == 'B') stu[i].score /= 1.5;
         else if (stu[i].id[0] == 'T') stu[i].score *= 1.5;
@@ -56,14 +54,16 @@ int main()
 
     for (int i = 0; i < n; i++) {
         if (!i || strcmp(stu[i].school, stu[i - 1].school)) {
-            strcpy(unit[count].name, stu[i].id);
+            count++;
+            strcpy(unit[count].name, stu[i].school);
             unit[count].num = 1;
-            unit[count++].score = stu[i].score;
+            unit[count].score = stu[i].score;
         } else {
             unit[count].num++;
             unit[count].score += stu[i].score;
         }
     }
+    count++;
     qsort(unit, count, sizeof(apartment), compar);
 
     printf("%d\n", count);

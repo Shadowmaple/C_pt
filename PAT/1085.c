@@ -6,9 +6,14 @@
 typedef struct
 {
     char name[7];
-    int score;
-    int num;
+    int score, num;
 } apartment;
+
+typedef struct
+{
+    char id[7], school[7];
+    int score;
+} student;
 
 int compar(const void *a, const void *b)
 {
@@ -21,50 +26,42 @@ int compar(const void *a, const void *b)
 void convert(char *c)
 {
     int len = strlen(c);
-    for (int i = 0; i < len; i++) {
+    for (int i = 0; i < len; i++)
         c[i] = tolower(c[i]);
-    }
 }
 
 int cmpName(const void *a, const void *b)
 {
-    apartment *x = (apartment *) a, *y = (apartment *) b;
-    return strcmp(x->name, y->name);
-}
-
-int cmpSearch(const void *a, const void *b)
-{
-    char *x = (char *) a;
-    apartment *y = (apartment *) b;
-    return strcmp(x, y->name);
+    student *x = (student *) a, *y = (student *) b;
+    return strcmp(x->school, y->school);
 }
 
 int main()
 {
     int n;
     scanf("%d", &n);
-    apartment unit[n];
+    apartment unit[10000] = {0};
+    student stu[n];
     int count = 0;
     char id[7], school[7];
     int score;
-    for (int i = 0; i < n; i++) {
-        unit[i].num = 0;
-        unit[i].score = 0;
 
-        scanf("%s %d %s", id, &score, school);
-        convert(school);
-        if (id[0] == 'B')   score /= 1.5;
-        else if (id[0] == 'T')  score *= 1.5;
-        void *flag = NULL;
-        flag = bsearch(school, unit, count, sizeof(apartment), cmpSearch);
-        if (flag != NULL) {
-            ((apartment *) flag)->num++;
-            ((apartment * )flag)->score += score;
-        } else {
-            strcpy(unit[count].name, school);
+    for (int i = 0; i < n; i++) {
+        scanf("%s %d %s", stu[i].id, stu[i].score, stu[i].school);
+        convert(stu[i].school);
+        if (stu[i].id[0] == 'B') stu[i].score /= 1.5;
+        else if (stu[i].id[0] == 'T') stu[i].score *= 1.5;
+    }
+    qsort(stu, n, sizeof(student), cmpName);
+
+    for (int i = 0; i < n; i++) {
+        if (!i || strcmp(stu[i].school, stu[i - 1].school)) {
+            strcpy(unit[count].name, stu[i].id);
             unit[count].num = 1;
-            unit[count++].score = score;
-            qsort(unit, count, sizeof(apartment), cmpName);
+            unit[count++].score = stu[i].score;
+        } else {
+            unit[count].num++;
+            unit[count].score += stu[i].score;
         }
     }
     qsort(unit, count, sizeof(apartment), compar);

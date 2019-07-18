@@ -25,6 +25,20 @@ void convert(char *c)
         c[i] = tolower(c[i]);
     }
 }
+
+int cmpName(const void *a, const void *b)
+{
+    apartment *x = (apartment *) a, *y = (apartment *) b;
+    return strcmp(x->name, y->name);
+}
+
+int cmpSearch(const void *a, const void *b)
+{
+    char *x = (char *) a;
+    apartment *y = (apartment *) b;
+    return strcmp(x, y->name);
+}
+
 int main()
 {
     int n;
@@ -41,20 +55,16 @@ int main()
         convert(school);
         if (id[0] == 'B')   score /= 1.5;
         else if (id[0] == 'T')  score *= 1.5;
-        int flag = -1;
-        for (int j = 0; j < count; j++) {
-            if (!strcmp(unit[j].name, school)) {
-                flag = j;
-                break;
-            }
-        }
-        if (flag != -1) {
-            unit[flag].num++;
-            unit[flag].score += score;
+        void *flag = NULL;
+        flag = bsearch(school, unit, count, sizeof(apartment), cmpSearch);
+        if (flag != NULL) {
+            ((apartment *) flag)->num++;
+            ((apartment * )flag)->score += score;
         } else {
             strcpy(unit[count].name, school);
             unit[count].num = 1;
             unit[count++].score = score;
+            qsort(unit, count, sizeof(apartment), cmpName);
         }
     }
     qsort(unit, count, sizeof(apartment), compar);
@@ -69,7 +79,6 @@ int main()
             printf("%d %s %d %d\n", rank, unit[i].name, unit[i].score, unit[i].num);
         else
             printf("%d %s %d %d\n", rank = i + 1, unit[i].name, unit[i].score, unit[i].num);
-        
     }
 
     return 0;

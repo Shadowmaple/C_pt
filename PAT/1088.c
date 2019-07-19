@@ -1,39 +1,31 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-void power(int m, int t, float w)
+int M, X, Y;
+
+void power(float t)
 {
-    if (w) t = w;
-    if (m > t)      printf("Gai");
-    else if (m < t) printf("Cong");
-    else            printf("Ping");
+    if (M > t)      printf(" Gai");
+    else if (M < t) printf(" Cong");
+    else            printf(" Ping");
 }
 
 int main()
 {
-    int M, X, Y;
     scanf("%d%d%d", &M, &X, &Y);
-    int jia, yi;
-    float bing;
-    int flag = 0;
-    for (jia = 99; jia >= 10; jia--) {
-        yi = (jia % 10) * 10 + jia / 10;
-        bing = (float) yi / Y;
+    for (int jia = 99; jia >= 10; jia--) {
+        int yi = (jia % 10) * 10 + jia / 10;
+        float bing = (float) yi / Y;
         if (abs(jia - yi) == bing * X) {
-            flag = 1;
-            break;
+            printf("%d", jia);
+            power(jia);
+            power(yi);
+            power(bing);
+            putchar('\n');
+            return 0;
         }
     }
-    if (!flag) {
-        puts("No Solution");
-        return 0;
-    }
-
-    // printf("%d %d %f\n", jia, yi, bing);
-    printf("%d ", jia);
-    power(M, jia, 0);      putchar(' ');
-    power(M, yi, 0);       putchar(' ');
-    power(M, 0, bing);     putchar('\n');
+    puts("No Solution");
     
     return 0;
 }

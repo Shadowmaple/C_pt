@@ -2,20 +2,16 @@
 
 int main()
 {
-    int ascii[126] = {0}, blank = 0;
+    int ascii[127] = {0};
+    char x;
     for (int i = 0; i < 2; i++) {
-        int x;
         while ((x = getchar()) != '\n') {
-            if (x == ' ' && !blank) {
-                blank = 1;
-                putchar(x);
-            } else if(!ascii[x - '0']) {
-                ascii[x - '0'] = 1;
+            if (!ascii[(int)x]) {
+                ascii[(int)x] = 1;
                 putchar(x);
             }
         }
     }
     putchar('\n');
-
     return 0;
 }
